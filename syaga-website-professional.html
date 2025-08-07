@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYAGA Consulting - Solutions IT & Infrastructure Cloud</title>
+    <meta name="description" content="SYAGA Consulting : Expert en transformation digitale, infrastructure cloud et cybersécurité. Solutions Microsoft 365, Azure, gestion IT externalisée.">
+    
+    <!-- MSAL.js pour Auth Microsoft 365 -->
+    <script src="https://alcdn.msauth.net/browser/2.32.0/js/msal-browser.min.js"></script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #0066cc;
+            --primary-dark: #0052a3;
+            --accent: #00a4ef;
+            --success: #00875a;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --light-gray: #f1f5f9;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+        }
+        
+        /* Header */
+        .header {
+            background: var(--white);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+        
+        .top-bar {
+            background: var(--light-gray);
+            padding: 0.5rem 0;
+            font-size: 0.875rem;
+        }
+        
+        .top-bar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .contact-info {
+            display: flex;
+            gap: 2rem;
+            color: var(--gray);
+        }
+        
+        .contact-info span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        
+        .main-nav {
+            background: var(--white);
+            padding: 1rem 0;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--dark);
+        }
+        
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-text .company {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo-text .tagline {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-menu a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: var(--white);
+            min-width: 200px;
+            box-shadow: var(--shadow-lg);
+            border-radius: 8px;
+            top: 100%;
+            margin-top: 0.5rem;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown-content a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--dark);
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        
+        .dropdown-content a:hover {
+            background: var(--light-gray);
+        }
+        
+        .nav-cta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-outline {
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            background: transparent;
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Hero Section */
+        .hero {
+            margin-top: 120px;
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0,102,204,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .hero-content .highlight {
+            color: var(--primary);
+        }
+        
+        .hero-content p {
+            font-size: 1.25rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .trust-badges {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+        
+        .badge-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--success);
+        }
+        
+        .hero-image {
+            position: relative;
+        }
+        
+        .hero-dashboard {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .dashboard-title {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .live-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            background: rgba(0,135,90,0.1);
+            color: var(--success);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .mini-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .mini-stat {
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: 8px;
+        }
+        
+        .mini-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .mini-stat-label {
+            font-size: 0.75rem;
+            color: var(--gray);
+            text-transform: uppercase;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--gray);
+        }
+        
+        .services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            padding: 2rem;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+        
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .service-card p {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Solutions Section */
+        .solutions {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+        
+        .solutions-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .solution-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            color: var(--gray);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn.active {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .solution-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .solution-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .solution-text p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .solution-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .solution-features li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            color: var(--dark);
+        }
+        
+        .check-icon {
+            color: var(--success);
+            font-size: 1.25rem;
+        }
+        
+        .solution-image {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        
+        /* Stats Section */
+        .stats {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+        }
+        
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+        
+        .stat-item h3 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Clients Section */
+        .clients {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .clients-logos {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+            opacity: 0.6;
+        }
+        
+        .client-logo {
+            height: 40px;
+            filter: grayscale(100%);
+            transition: filter 0.3s;
+        }
+        
+        .client-logo:hover {
+            filter: grayscale(0%);
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background: var(--dark);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 60px 0 20px;
+            background: #0f172a;
+            color: white;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-brand p {
+            opacity: 0.8;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        
+        .footer-social a:hover {
+            background: var(--primary);
+        }
+        
+        .footer-column h4 {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-column a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            opacity: 0.8;
+        }
+        
+        /* Auth Modal */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .auth-modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        .modal-content h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .modal-content p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+        
+        .microsoft-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #0078d4;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .microsoft-btn:hover {
+            background: #106ebe;
+        }
+        
+        .close-modal {
+            margin-top: 1rem;
+            color: var(--gray);
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="top-bar-content">
+                <div class="contact-info">
+                    <span>📞 04 12 39 48 16</span>
+                    <span>✉️ contact@syaga.fr</span>
+                    <span>📍 Port-de-Bouc, Nîmes, Saint-Andiol</span>
+                </div>
+                <div class="social-links">
+                    <a href="#">LinkedIn</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">GitHub</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Navigation -->
+        <nav class="main-nav">
+            <div class="nav-container">
+                <a href="#" class="logo">
+                    <div class="logo-icon">S</div>
+                    <div class="logo-text">
+                        <span class="company">SYAGA Consulting</span>
+                        <span class="tagline">Solutions IT Innovantes</span>
+                    </div>
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="#services">Services</a></li>
+                    <li class="dropdown">
+                        <a href="#solutions">Solutions ▾</a>
+                        <div class="dropdown-content">
+                            <a href="#">Infrastructure Cloud</a>
+                            <a href="#">Microsoft 365</a>
+                            <a href="#">Cybersécurité</a>
+                            <a href="#">Support IT</a>
+                        </div>
+                    </li>
+                    <li><a href="#about">À propos</a></li>
+                    <li><a href="#clients">Références</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                
+                <div class="nav-cta">
+                    <button class="btn btn-outline" onclick="showAuthModal()">Espace Client</button>
+                    <a href="#demo" class="btn btn-primary">Demander une démo</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Transformez votre <span class="highlight">infrastructure IT</span> avec SYAGA</h1>
+                <p>Solutions cloud innovantes, cybersécurité renforcée et support expert pour propulser votre entreprise vers l'excellence digitale.</p>
+                
+                <div class="hero-buttons">
+                    <a href="#demo" class="btn btn-primary">Découvrir nos solutions</a>
+                    <button class="btn btn-outline" onclick="showAuthModal()">
+                        🔐 Accès Dashboard Client
+                    </button>
+                </div>
+                
+                <div class="trust-badges">
+                    <div class="badge">
+                        <span class="badge-icon">✓</span>
+                        <span>15+ ans d'expertise</span>
+                    </div>
+                    <div class="badge">
+                        <span class="badge-icon">✓</span>
+                        <span>150+ clients satisfaits</span>
+                    </div>
+                    <div class="badge">
+                        <span class="badge-icon">✓</span>
+                        <span>99.99% uptime</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="hero-dashboard">
+                    <div class="dashboard-header">
+                        <span class="dashboard-title">Dashboard PRISM™</span>
+                        <div class="live-badge">
+                            <span class="live-dot"></span>
+                            <span>Live</span>
+                        </div>
+                    </div>
+                    <div class="mini-stats">
+                        <div class="mini-stat">
+                            <div class="mini-stat-value">42</div>
+                            <div class="mini-stat-label">Serveurs actifs</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-stat-value">99.99%</div>
+                            <div class="mini-stat-label">Uptime</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-stat-value">3</div>
+                            <div class="mini-stat-label">Tickets ouverts</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-stat-value">24/7</div>
+                            <div class="mini-stat-label">Support</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>Nos Services</h2>
+            <p>Des solutions complètes pour répondre à tous vos besoins IT</p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">☁️</div>
+                <h3>Infrastructure Cloud</h3>
+                <p>Migration et gestion complète de vos infrastructures Azure et AWS. Architecture haute disponibilité et optimisation des coûts.</p>
+                <a href="#" class="service-link">En savoir plus →</a>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🛡️</div>
+                <h3>Cybersécurité</h3>
+                <p>Protection avancée contre les menaces, audits de sécurité, mise en conformité RGPD et formation de vos équipes.</p>
+                <a href="#" class="service-link">En savoir plus →</a>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>Microsoft 365</h3>
+                <p>Déploiement, migration et administration de votre environnement Microsoft 365. Support utilisateurs et formations.</p>
+                <a href="#" class="service-link">En savoir plus →</a>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🔧</div>
+                <h3>Support IT Managé</h3>
+                <p>Supervision 24/7, maintenance préventive, helpdesk multilingue et gestion complète de votre parc informatique.</p>
+                <a href="#" class="service-link">En savoir plus →</a>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🤖</div>
+                <h3>Automatisation</h3>
+                <p>Optimisation de vos processus IT avec PowerShell, Azure Automation et notre suite PRISM™ propriétaire.</p>
+                <a href="#" class="service-link">En savoir plus →</a>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">📈</div>
+                <h3>Business Intelligence</h3>
+                <p>Tableaux de bord temps réel, analytics avancés et reporting automatisé pour piloter votre activité.</p>
+                <a href="#" class="service-link">En savoir plus →</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Solutions Section -->
+    <section class="solutions" id="solutions">
+        <div class="solutions-container">
+            <div class="section-header">
+                <h2>Solutions par secteur</h2>
+                <p>Des expertises métier adaptées à votre industrie</p>
+            </div>
+            
+            <div class="solution-tabs">
+                <button class="tab-btn active">Industrie</button>
+                <button class="tab-btn">Santé</button>
+                <button class="tab-btn">Finance</button>
+                <button class="tab-btn">Retail</button>
+            </div>
+            
+            <div class="solution-content">
+                <div class="solution-text">
+                    <h3>Solutions pour l'Industrie 4.0</h3>
+                    <p>Accompagnez votre transformation digitale avec nos solutions spécialisées pour le secteur industriel. De la supervision SCADA à l'IoT, nous optimisons vos processus de production.</p>
+                    
+                    <ul class="solution-features">
+                        <li><span class="check-icon">✓</span> Monitoring temps réel des lignes de production</li>
+                        <li><span class="check-icon">✓</span> Maintenance prédictive avec IA</li>
+                        <li><span class="check-icon">✓</span> Intégration ERP/MES</li>
+                        <li><span class="check-icon">✓</span> Conformité normes ISO</li>
+                    </ul>
+                    
+                    <a href="#" class="btn btn-primary">Découvrir la solution</a>
+                </div>
+                
+                <div class="solution-image">
+                    <div class="hero-dashboard">
+                        <div class="dashboard-header">
+                            <span class="dashboard-title">Production Dashboard</span>
+                            <div class="live-badge">
+                                <span class="live-dot"></span>
+                                <span>Real-time</span>
+                            </div>
+                        </div>
+                        <div class="mini-stats">
+                            <div class="mini-stat">
+                                <div class="mini-stat-value">98.5%</div>
+                                <div class="mini-stat-label">OEE Global</div>
+                            </div>
+                            <div class="mini-stat">
+                                <div class="mini-stat-value">1.2M</div>
+                                <div class="mini-stat-label">Unités/mois</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>15+</h3>
+                <p>Années d'expertise</p>
+            </div>
+            <div class="stat-item">
+                <h3>150+</h3>
+                <p>Clients actifs</p>
+            </div>
+            <div class="stat-item">
+                <h3>99.99%</h3>
+                <p>Disponibilité garantie</p>
+            </div>
+            <div class="stat-item">
+                <h3>24/7</h3>
+                <p>Support technique</p>
+            </div>
+            <div class="stat-item">
+                <h3>500K+</h3>
+                <p>Tickets résolus</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Clients Section -->
+    <section class="clients" id="clients">
+        <div class="section-header">
+            <h2>Ils nous font confiance</h2>
+            <p>Des entreprises leaders dans leur secteur</p>
+        </div>
+        
+        <div class="clients-logos">
+            <div class="client-logo">LAA</div>
+            <div class="client-logo">PHARMABEST</div>
+            <div class="client-logo">UAI</div>
+            <div class="client-logo">GUERBET</div>
+            <div class="client-logo">QUADRIMEX</div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta" id="demo">
+        <h2>Prêt à transformer votre IT ?</h2>
+        <p>Découvrez comment SYAGA peut révolutionner votre infrastructure</p>
+        <button class="btn btn-primary" style="background: white; color: var(--primary);">
+            Planifier une démo gratuite
+        </button>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>SYAGA Consulting</h3>
+                <p>Votre partenaire de confiance pour la transformation digitale et la gestion IT externalisée.</p>
+                <div class="footer-social">
+                    <a href="#">in</a>
+                    <a href="#">tw</a>
+                    <a href="#">fb</a>
+                    <a href="#">gh</a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Infrastructure Cloud</a></li>
+                    <li><a href="#">Cybersécurité</a></li>
+                    <li><a href="#">Microsoft 365</a></li>
+                    <li><a href="#">Support IT</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Entreprise</h4>
+                <ul>
+                    <li><a href="#">À propos</a></li>
+                    <li><a href="#">Équipe</a></li>
+                    <li><a href="#">Carrières</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul>
+                    <li>📞 04 12 39 48 16</li>
+                    <li>✉️ contact@syaga.fr</li>
+                    <li>📍 Port-de-Bouc</li>
+                    <li>📍 Nîmes</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 SYAGA Consulting. Tous droits réservés. | Mentions légales | RGPD | CGV</p>
+        </div>
+    </footer>
+    
+    <!-- Auth Modal -->
+    <div class="auth-modal" id="authModal">
+        <div class="modal-content">
+            <h3>Espace Client Sécurisé</h3>
+            <p>Connectez-vous avec votre compte Microsoft 365 pour accéder à votre dashboard personnalisé PRISM™</p>
+            
+            <button class="microsoft-btn" onclick="signInWithMicrosoft()">
+                <svg width="21" height="21" viewBox="0 0 21 21" fill="currentColor">
+                    <path d="M0 0h10v10H0z"/>
+                    <path d="M11 0h10v10H11z"/>
+                    <path d="M0 11h10v10H0z"/>
+                    <path d="M11 11h10v10H11z"/>
+                </svg>
+                Se connecter avec Microsoft
+            </button>
+            
+            <div class="close-modal" onclick="hideAuthModal()">Annuler</div>
+        </div>
+    </div>
+    
+    <script>
+        // MSAL Configuration
+        const msalConfig = {
+            auth: {
+                clientId: "YOUR_CLIENT_ID",
+                authority: "https://login.microsoftonline.com/common",
+                redirectUri: window.location.origin
+            }
+        };
+        
+        let msalInstance;
+        
+        // Initialize MSAL
+        if (typeof msal !== 'undefined') {
+            msalInstance = new msal.PublicClientApplication(msalConfig);
+        }
+        
+        function showAuthModal() {
+            document.getElementById('authModal').classList.add('active');
+        }
+        
+        function hideAuthModal() {
+            document.getElementById('authModal').classList.remove('active');
+        }
+        
+        async function signInWithMicrosoft() {
+            if (!msalInstance) {
+                alert("Configuration Microsoft 365 requise. Contactez l'administrateur.");
+                return;
+            }
+            
+            try {
+                const loginRequest = {
+                    scopes: ["user.read"]
+                };
+                
+                const loginResponse = await msalInstance.loginPopup(loginRequest);
+                console.log('Login successful:', loginResponse);
+                
+                // Redirect to dashboard
+                window.location.href = '/dashboard';
+                
+            } catch (error) {
+                console.error('Login failed:', error);
+                alert("Erreur de connexion. Veuillez réessayer.");
+            }
+        }
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+        
+        // Tab functionality
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

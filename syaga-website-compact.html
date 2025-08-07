@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYAGA - Expert Infrastructure Microsoft</title>
+    <meta name="description" content="Expert Microsoft 25 ans. Active Directory, M365, durcissement secteur public. Là où les autres abandonnent, nous trouvons la solution.">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #0056b3;
+            --dark: #2c3e50;
+            --gray: #6c757d;
+            --light: #f8f9fa;
+            --white: #ffffff;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, sans-serif;
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--dark);
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Compact */
+        header {
+            background: var(--white);
+            border-bottom: 3px solid var(--primary);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .tagline {
+            font-size: 13px;
+            color: var(--gray);
+            font-style: italic;
+        }
+        
+        nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        .header-phone {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        /* Hero Compact */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #003d82 100%);
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 15px;
+        }
+        
+        .hero h1 strong {
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            opacity: 0.95;
+            margin-bottom: 25px;
+        }
+        
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+        
+        .badge-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .badge-number {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        /* Main Grid */
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            padding: 40px 0;
+        }
+        
+        /* Services Compact */
+        .services-section h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--dark);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .service-box {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .service-box h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .service-box ul {
+            list-style: none;
+            font-size: 13px;
+            color: var(--gray);
+        }
+        
+        .service-box li {
+            padding: 4px 0;
+        }
+        
+        .service-box li:before {
+            content: "• ";
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 80px;
+            height: fit-content;
+        }
+        
+        .sidebar-box {
+            background: var(--white);
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .sidebar-box h3 {
+            font-size: 18px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .sidebar-box p {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+        
+        .contact-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
+        
+        .contact-btn:hover {
+            background: #003d82;
+        }
+        
+        .stats-list {
+            list-style: none;
+        }
+        
+        .stats-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--light);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .stats-list strong {
+            color: var(--primary);
+        }
+        
+        /* Expertise Section */
+        .expertise-section {
+            background: var(--light);
+            padding: 30px;
+            border-radius: 6px;
+        }
+        
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+        
+        .expertise-item h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+        
+        .expertise-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 11px;
+            color: var(--gray);
+        }
+        
+        .tag.primary {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* Cases */
+        .cases-section {
+            margin-top: 30px;
+        }
+        
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .case-card {
+            background: white;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+        
+        .case-card h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .case-card p {
+            font-size: 13px;
+            color: var(--gray);
+        }
+        
+        /* Footer Minimal */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 20px 0;
+            margin-top: 40px;
+            text-align: center;
+            font-size: 13px;
+        }
+        
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
+            .expertise-grid { grid-template-columns: 1fr; }
+            .cases-grid { grid-template-columns: 1fr; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Compact -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <span class="logo">SYAGA</span>
+                    <span class="tagline">L'expert que les experts appellent</span>
+                </div>
+                <nav>
+                    <a href="#services">Services</a>
+                    <a href="#expertise">Expertise</a>
+                    <a href="#cases">Cas</a>
+                </nav>
+                <a href="tel:0412394816" class="header-phone">04 12 39 48 16</a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Compact -->
+    <section class="hero">
+        <div class="container">
+            <h1>Là où les autres <strong>abandonnent</strong>, SYAGA trouve la solution</h1>
+            <p>25 ans d'expertise Microsoft • Infrastructure IT • Sécurité Active Directory</p>
+            <div class="hero-badges">
+                <div class="badge-item">
+                    <span class="badge-number">25</span>
+                    <span>ans<br>expertise</span>
+                </div>
+                <div class="badge-item">
+                    <span class="badge-number">99%</span>
+                    <span>remote<br>intervention</span>
+                </div>
+                <div class="badge-item">
+                    <span class="badge-number">24h</span>
+                    <span>délai<br>réponse</span>
+                </div>
+                <div class="badge-item">
+                    <span class="badge-number">100%</span>
+                    <span>taux<br>résolution</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Main Content Grid -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Left Column - Services -->
+            <div>
+                <section class="services-section" id="services">
+                    <h2>Services & Solutions</h2>
+                    
+                    <div class="services-grid">
+                        <div class="service-box">
+                            <h3>🛡️ Active Directory</h3>
+                            <ul>
+                                <li>Durcissement AD (HardenAD)</li>
+                                <li>Conformité ANSSI secteur public</li>
+                                <li>Migration 2008/2012 → 2019/2022</li>
+                                <li>Audit sécurité trimestriel</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-box">
+                            <h3>☁️ Microsoft 365</h3>
+                            <ul>
+                                <li>Migration Exchange Online</li>
+                                <li>Teams, SharePoint, OneDrive</li>
+                                <li>Intune MDM</li>
+                                <li>Hybride on-premise</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-box">
+                            <h3>🏛️ Secteur Public</h3>
+                            <ul>
+                                <li>Mairies & collectivités</li>
+                                <li>Conformité réglementaire</li>
+                                <li>Accompagnement ANSSI</li>
+                                <li>Formation équipes</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-box">
+                            <h3>💾 Infrastructure</h3>
+                            <ul>
+                                <li>Hyper-V (100%), VMware (50%)</li>
+                                <li>Veeam Backup (99.9%)</li>
+                                <li>Zabbix/Centreon monitoring</li>
+                                <li>PRA/PCA trimestriel</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Expertise Compact -->
+                <section class="expertise-section" id="expertise">
+                    <h2 style="font-size: 24px; margin-bottom: 20px;">Expertise Technique</h2>
+                    
+                    <div class="expertise-grid">
+                        <div class="expertise-item">
+                            <h4>Microsoft</h4>
+                            <div class="expertise-tags">
+                                <span class="tag primary">AD Expert</span>
+                                <span class="tag primary">M365</span>
+                                <span class="tag">PowerShell</span>
+                                <span class="tag">MCSE 2000</span>
+                            </div>
+                        </div>
+                        
+                        <div class="expertise-item">
+                            <h4>Virtualisation</h4>
+                            <div class="expertise-tags">
+                                <span class="tag primary">Hyper-V 100%</span>
+                                <span class="tag">VMware 50%</span>
+                                <span class="tag">Proxmox</span>
+                            </div>
+                        </div>
+                        
+                        <div class="expertise-item">
+                            <h4>Backup</h4>
+                            <div class="expertise-tags">
+                                <span class="tag primary">Veeam 99%</span>
+                                <span class="tag">PRA/PCA</span>
+                                <span class="tag">Réplication</span>
+                            </div>
+                        </div>
+                        
+                        <div class="expertise-item">
+                            <h4>Monitoring</h4>
+                            <div class="expertise-tags">
+                                <span class="tag primary">Zabbix 90%</span>
+                                <span class="tag">Centreon 75%</span>
+                                <span class="tag">Wazuh</span>
+                            </div>
+                        </div>
+                        
+                        <div class="expertise-item">
+                            <h4>Sécurité</h4>
+                            <div class="expertise-tags">
+                                <span class="tag primary">HardenAD</span>
+                                <span class="tag primary">ANSSI</span>
+                                <span class="tag">ZTNA</span>
+                            </div>
+                        </div>
+                        
+                        <div class="expertise-item">
+                            <h4>Spécialités</h4>
+                            <div class="expertise-tags">
+                                <span class="tag primary">Reverse Eng.</span>
+                                <span class="tag">Legacy Code</span>
+                                <span class="tag">SalesLogix</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Cases Compact -->
+                <section class="cases-section" id="cases">
+                    <h2 style="font-size: 24px; margin-bottom: 20px;">Cas Concrets</h2>
+                    
+                    <div class="cases-grid">
+                        <div class="case-card">
+                            <h4>🏛️ Mairie - ANSSI</h4>
+                            <p>Durcissement AD complet, conformité ANSSI, migration 2022, audit trimestriel.</p>
+                        </div>
+                        
+                        <div class="case-card">
+                            <h4>🏥 Hôpital - HDS</h4>
+                            <p>Sécurisation urgente, conformité HDS, protection données patients, monitoring 24/7.</p>
+                        </div>
+                        
+                        <div class="case-card">
+                            <h4>🏭 ERP abandonné</h4>
+                            <p>Reverse engineering SalesLogix 2000, migration progressive après 3 échecs.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- Right Column - Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-box">
+                    <h3>Contact Direct</h3>
+                    <p>Un défi impossible ?<br>Parlons-en.</p>
+                    <a href="tel:0412394816" class="contact-btn">📞 04 12 39 48 16</a>
+                    <p style="text-align: center; margin-top: 10px; font-size: 12px;">
+                        contact@syaga.fr<br>
+                        Réponse sous 24h
+                    </p>
+                </div>
+                
+                <div class="sidebar-box">
+                    <h3>Chiffres Clés</h3>
+                    <ul class="stats-list">
+                        <li>
+                            <span>Expérience</span>
+                            <strong>25 ans</strong>
+                        </li>
+                        <li>
+                            <span>Remote</span>
+                            <strong>99%</strong>
+                        </li>
+                        <li>
+                            <span>Résolution</span>
+                            <strong>100%</strong>
+                        </li>
+                        <li>
+                            <span>Zones</span>
+                            <strong>FR, MC, MA</strong>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-box" style="background: var(--light);">
+                    <h3>Notre Force</h3>
+                    <p style="font-size: 13px; line-height: 1.5;">
+                        <strong>"Là où vous voyez un problème, nous voyons une solution."</strong><br><br>
+                        Reverse engineering, code legacy, intégrations impossibles. 
+                        L'expertise Microsoft pure depuis MCSE 2000.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer Minimal -->
+    <footer>
+        <div class="container">
+            © 2025 SYAGA - Expert Infrastructure Microsoft | 
+            <a href="#">Mentions légales</a> | 
+            <a href="#">RGPD</a> | 
+            France • Monaco • Maroc • International
+        </div>
+    </footer>
+</body>
+</html>

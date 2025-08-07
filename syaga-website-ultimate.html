@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Optimisé -->
+    <title>SYAGA Consulting - Là où les autres abandonnent, nous trouvons la solution | Expert Microsoft Infrastructure IT PACA</title>
+    <meta name="description" content="SYAGA : Expert Microsoft depuis 25 ans. Spécialiste infrastructure IT, Active Directory, durcissement AD secteur public (mairies, hôpitaux), conformité ANSSI, Microsoft 365. Reverse engineering, intégrations complexes. Là où les autres abandonnent, SYAGA trouve la solution.">
+    <meta name="keywords" content="SYAGA, durcissement AD, HardenAD, ANSSI, conformité mairie, hôpital HDS, secteur public, infrastructure Microsoft, Active Directory sécurisation, Microsoft 365, Hyper-V, Veeam, reverse engineering, code legacy, ZTNA, Zero Trust, Zabbix, PACA, collectivités territoriales, PowerShell, automatisation IT">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.syaga.fr/">
+    <meta property="og:title" content="SYAGA - Là où les autres abandonnent, nous trouvons la solution">
+    <meta property="og:description" content="25 ans d'expertise Microsoft + IA générative = Aucun défi impossible. L'expert que les experts appellent.">
+    <meta property="og:image" content="https://www.syaga.fr/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="SYAGA - L'expert que les experts appellent">
+    <meta property="twitter:description" content="Là où les autres abandonnent, SYAGA trouve la solution. 25 ans d'expertise Microsoft.">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://www.syaga.fr/">
+    
+    <!-- Schema.org Local Business -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ITConsultant",
+        "name": "SYAGA Consulting",
+        "alternateName": "SYAGA",
+        "slogan": "Là où les autres abandonnent, SYAGA trouve la solution",
+        "url": "https://www.syaga.fr",
+        "description": "Expert Microsoft Infrastructure IT depuis 25 ans. Spécialiste des intégrations impossibles et du reverse engineering.",
+        "foundingDate": "2000",
+        "founder": {
+            "@type": "Person",
+            "name": "Sébastien QUESTIER",
+            "jobTitle": "Expert Infrastructure Microsoft",
+            "alumniOf": "MCSE 2000"
+        },
+        "areaServed": [
+            {"@type": "Place", "name": "PACA"},
+            {"@type": "Country", "name": "France"},
+            {"@type": "Country", "name": "Monaco"},
+            {"@type": "Country", "name": "Maroc"},
+            {"@type": "Country", "name": "Espagne"},
+            {"@type": "Country", "name": "Royaume-Uni"}
+        ],
+        "knowsAbout": [
+            "Microsoft Infrastructure",
+            "Active Directory",
+            "Microsoft 365",
+            "Hyper-V",
+            "VMware",
+            "Veeam Backup",
+            "PowerShell",
+            "Reverse Engineering",
+            "Legacy Code",
+            "SalesLogix",
+            "Zero Trust",
+            "ZTNA"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+33412394816",
+            "contactType": "Support technique",
+            "availableLanguage": ["Français", "Anglais"],
+            "areaServed": "Worldwide",
+            "contactOption": "Remote support preferred"
+        }
+    }
+    </script>
+    
+    <!-- MSAL.js pour Auth Microsoft 365 -->
+    <script src="https://alcdn.msauth.net/browser/2.32.0/js/msal-browser.min.js"></script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #0066cc;
+            --primary-dark: #0052a3;
+            --accent: #00a4ef;
+            --success: #00875a;
+            --warning: #ff6b35;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --light-gray: #f1f5f9;
+            --white: #ffffff;
+            --gradient-primary: linear-gradient(135deg, #0066cc 0%, #00a4ef 100%);
+            --gradient-hero: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+        }
+        
+        /* Header Minimaliste */
+        .header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 28px;
+            box-shadow: var(--shadow);
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-text .company {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo-text .tagline {
+            font-size: 0.875rem;
+            color: var(--gray);
+            font-style: italic;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-menu a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-cta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn-ghost {
+            color: var(--primary);
+            background: transparent;
+        }
+        
+        .btn-ghost:hover {
+            background: var(--light-gray);
+        }
+        
+        /* Hero Section Épuré */
+        .hero {
+            margin-top: 82px;
+            padding: 100px 0;
+            background: var(--gradient-hero);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0,164,239,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero h1 .highlight {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+        
+        .hero-description {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 4rem;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+        }
+        
+        .stat {
+            text-align: center;
+            color: white;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Section Philosophy */
+        .philosophy {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .section-header .subtitle {
+            font-size: 1.25rem;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .philosophy-card {
+            padding: 2rem;
+            background: var(--light-gray);
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .philosophy-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        
+        .philosophy-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .philosophy-card p {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+        
+        /* Section Compétences */
+        .competences {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+        
+        .competences-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            color: var(--gray);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn.active {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: white;
+        }
+        
+        .competences-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+        }
+        
+        .competences-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .competence-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .competence-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--light-gray);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .competence-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+            color: var(--dark);
+        }
+        
+        .competence-info .level {
+            font-size: 0.875rem;
+            color: var(--gray);
+        }
+        
+        .expertise-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        /* Section IA */
+        .ai-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+        }
+        
+        .ai-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .ai-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .ai-text p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .ai-features {
+            list-style: none;
+            margin-top: 2rem;
+        }
+        
+        .ai-features li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .ai-features .icon {
+            color: var(--success);
+            font-size: 1.5rem;
+        }
+        
+        .ai-visual {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+        
+        .ai-equation {
+            font-size: 1.5rem;
+            font-weight: 600;
+            padding: 2rem;
+            background: var(--light-gray);
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+        
+        .ai-equation .plus {
+            color: var(--primary);
+            margin: 0 1rem;
+        }
+        
+        .ai-equation .equals {
+            color: var(--success);
+            margin: 0 1rem;
+        }
+        
+        /* Section Cas d'Usage */
+        .use-cases {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .case-card {
+            padding: 2rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        
+        .case-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .case-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .case-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .case-card p {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .case-card .solution {
+            padding: 1rem;
+            background: rgba(0,164,239,0.1);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .case-card .solution strong {
+            color: var(--primary);
+        }
+        
+        /* Section International */
+        .international {
+            padding: 80px 0;
+            background: var(--dark);
+            color: white;
+        }
+        
+        .world-map {
+            text-align: center;
+            margin: 3rem 0;
+        }
+        
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .country-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .country-flag {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .country-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .country-info {
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .testimonial-card {
+            padding: 2rem;
+            background: var(--light-gray);
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+        
+        .testimonial-text {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .author-info .name {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .author-info .role {
+            font-size: 0.875rem;
+            color: var(--gray);
+        }
+        
+        /* CTA Final */
+        .final-cta {
+            padding: 100px 0;
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+        }
+        
+        .final-cta h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .final-cta p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+        
+        .contact-direct {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.25rem;
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 40px 0;
+            background: #0f172a;
+            color: white;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.8;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hero h1 { font-size: 2rem; }
+            .hero-stats { flex-direction: column; gap: 2rem; }
+            .philosophy-grid { grid-template-columns: 1fr; }
+            .ai-content { grid-template-columns: 1fr; }
+            .competences-grid { grid-template-columns: 1fr; }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">S</div>
+                <div class="logo-text">
+                    <span class="company">SYAGA</span>
+                    <span class="tagline">L'expert que les experts appellent</span>
+                </div>
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="#philosophy">Notre Vision</a></li>
+                <li><a href="#competences">Expertises</a></li>
+                <li><a href="#ai">IA & Innovation</a></li>
+                <li><a href="#cases">Cas Concrets</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            
+            <div class="nav-cta">
+                <button class="btn btn-ghost" onclick="showAuth()">🔐 Dashboard PRISM</button>
+                <a href="#contact" class="btn btn-primary">Parlons de votre défi</a>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container fade-in">
+            <h1>Là où les autres <span class="highlight">abandonnent</span>,<br>SYAGA trouve la solution</h1>
+            
+            <p class="hero-subtitle">Là où vous voyez un problème, nous voyons des solutions</p>
+            
+            <p class="hero-description">
+                25 ans d'expertise Microsoft combinée à l'IA moderne.<br>
+                Spécialiste des intégrations complexes et du code legacy.
+            </p>
+            
+            <div class="hero-buttons">
+                <a href="#cases" class="btn btn-primary" style="background: white; color: var(--dark);">
+                    Découvrir nos réussites impossibles
+                </a>
+                <a href="#contact" class="btn btn-ghost" style="color: white; border: 2px solid white;">
+                    J'ai un défi impossible
+                </a>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-value">25 ans</span>
+                    <span class="stat-label">Expertise Microsoft</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">99%</span>
+                    <span class="stat-label">Remote</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">100%</span>
+                    <span class="stat-label">Taux de résolution</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">24h</span>
+                    <span class="stat-label">Délai intervention</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Philosophy Section -->
+    <section class="philosophy" id="philosophy">
+        <div class="container">
+            <div class="section-header">
+                <h2>Notre Philosophie</h2>
+                <p class="subtitle">Pourquoi SYAGA réussit là où les autres échouent</p>
+            </div>
+            
+            <div class="philosophy-grid">
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">🎯</div>
+                    <h3>Solutions pragmatiques</h3>
+                    <p>Chaque système peut être connecté, chaque problème a une solution. Notre expertise permet de la trouver.</p>
+                </div>
+                
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">🧠</div>
+                    <h3>Humain + IA = Invincible</h3>
+                    <p>L'IA est notre outil libérateur. L'expertise humaine reste au centre. Ensemble, plus aucun défi n'est impossible.</p>
+                </div>
+                
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">🚀</div>
+                    <h3>Transformer, pas remplacer</h3>
+                    <p>Nous connectons tous les systèmes, même les plus incompatibles. Votre legacy devient moderne sans tout reconstruire.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Compétences Section -->
+    <section class="competences" id="competences">
+        <div class="container">
+            <div class="section-header">
+                <h2>Expertises Techniques</h2>
+                <p class="subtitle">25 ans d'expérience Microsoft + les meilleures technologies modernes</p>
+            </div>
+            
+            <div class="competences-tabs">
+                <button class="tab-btn active" onclick="showTab('microsoft')">Microsoft</button>
+                <button class="tab-btn" onclick="showTab('virtualisation')">Virtualisation</button>
+                <button class="tab-btn" onclick="showTab('monitoring')">Monitoring</button>
+                <button class="tab-btn" onclick="showTab('backup')">Backup & PRA</button>
+                <button class="tab-btn" onclick="showTab('special')">Spécialités</button>
+            </div>
+            
+            <div class="competences-content">
+                <div id="microsoft-tab" class="tab-content">
+                    <h3 style="margin-bottom: 2rem;">Infrastructure Microsoft - Notre ADN</h3>
+                    <div class="competences-grid">
+                        <div class="competence-item">
+                            <div class="competence-icon">🛡️</div>
+                            <div class="competence-info">
+                                <h4>Active Directory</h4>
+                                <span class="level">Expert absolu <span class="expertise-badge">100%</span></span>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="competence-icon">☁️</div>
+                            <div class="competence-info">
+                                <h4>Microsoft 365</h4>
+                                <span class="level">Exchange, Teams, SharePoint <span class="expertise-badge">100%</span></span>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="competence-icon">🔒</div>
+                            <div class="competence-info">
+                                <h4>ZTNA Private Access</h4>
+                                <span class="level">Zero Trust moderne</span>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="competence-icon">⚡</div>
+                            <div class="competence-info">
+                                <h4>PowerShell</h4>
+                                <span class="level">Automatisation avancée <span class="expertise-badge">100%</span></span>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="competence-icon">🔧</div>
+                            <div class="competence-info">
+                                <h4>Intune</h4>
+                                <span class="level">Gestion des devices</span>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="competence-icon">🛡️</div>
+                            <div class="competence-info">
+                                <h4>Microsoft Defender</h4>
+                                <span class="level">Suite complète</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="virtualisation-tab" class="tab-content" style="display: none;">
+                    <h3 style="margin-bottom: 2rem;">Virtualisation & Infrastructure</h3>
+                    <div class="competences-grid">
+                        <div class="competence-item">
+                            <div class="competence-icon">🖥️</div>
+                            <div class="competence-info">
+                                <h4>Hyper-V</h4>
+                                <span class="level">Expert principal <span class="expertise-badge">100%</span></span>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="competence-icon">🔷</div>
+                            <div class="competence-info">
+                                <h4>VMware vSphere</h4>
+                                <span class="level">ESXi, vCenter <span class="expertise-badge">50%</span></span>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="competence-icon">🐧</div>
+                            <div class="competence-info">
+                                <h4>Proxmox</h4>
+                                <span class="level">Alternative open source</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="monitoring-tab" class="tab-content" style="display: none;">
+                    <h3 style="margin-bottom: 2rem;">Monitoring & Supervision</h3>
+                    <div class="competences-grid">
+                        <div class="competence-item">
+                            <div class="competence-icon">📊</div>
+                            <div class="competence-info">
+                                <h4>Zabbix</h4>
+                                <span class="level">Solution principale <span class="expertise-badge">90%</span></span>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="competence-icon">📈</div>
+                            <div class="competence-info">
+                                <h4>Centreon</h4>
+                                <span class="level">Monitoring avancé <span class="expertise-badge">75%</span></span>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="competence-icon">🔍</div>
+                            <div class="competence-info">
+                                <h4>Wazuh</h4>
+                                <span class="level">SIEM customisé pour Event Logs</span>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="competence-icon">📉</div>
+                            <div class="competence-info">
+                                <h4>PRTG</h4>
+                                <span class="level">Monitoring réseau</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="backup-tab" class="tab-content" style="display: none;">
+                    <h3 style="margin-bottom: 2rem;">Backup & Continuité d'Activité</h3>
+                    <div class="competences-grid">
+                        <div class="competence-item">
+                            <div class="competence-icon">💾</div>
+                            <div class="competence-info">
+                                <h4>Veeam</h4>
+                                <span class="level">Solution exclusive <span class="expertise-badge">99.9%</span></span>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="competence-icon">🔄</div>
+                            <div class="competence-info">
+                                <h4>Réplication Hyper-V</h4>
+                                <span class="level">Locale et étendue</span>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="competence-icon">✅</div>
+                            <div class="competence-info">
+                                <h4>Tests PRA/PCA</h4>
+                                <span class="level">Trimestriels rigoureux</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="special-tab" class="tab-content" style="display: none;">
+                    <h3 style="margin-bottom: 2rem;">Nos Spécialités Uniques</h3>
+                    <div class="competences-grid">
+                        <div class="competence-item">
+                            <div class="competence-icon">🔧</div>
+                            <div class="competence-info">
+                                <h4>Reverse Engineering</h4>
+                                <span class="level">SalesLogix, Code Legacy</span>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="competence-icon">🔗</div>
+                            <div class="competence-info">
+                                <h4>Intégrations Impossibles</h4>
+                                <span class="level">Connecter l'inconnectable</span>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="competence-icon">🚑</div>
+                            <div class="competence-info">
+                                <h4>Code Rescue</h4>
+                                <span class="level">Sauvetage WinForms, VB6</span>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="competence-icon">🤖</div>
+                            <div class="competence-info">
+                                <h4>IA Générative</h4>
+                                <span class="level">Claude, ChatGPT, Copilot</span>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="competence-icon">🌍</div>
+                            <div class="competence-info">
+                                <h4>99% Remote</h4>
+                                <span class="level">RDP, TeamViewer, AnyDesk</span>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="competence-icon">🔥</div>
+                            <div class="competence-info">
+                                <h4>HardenAD</h4>
+                                <span class="level">Conformité ANSSI, Mairies, Hôpitaux</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- IA Section -->
+    <section class="ai-section" id="ai">
+        <div class="container">
+            <div class="ai-content">
+                <div class="ai-text">
+                    <h2>L'IA comme outil libérateur</h2>
+                    <p>
+                        Nous combinons 25 ans d'expertise Microsoft avec la puissance de l'IA générative moderne.
+                        L'humain reste au centre de la solution, l'IA amplifie nos capacités.
+                    </p>
+                    <p>
+                        Avec Claude, ChatGPT et Copilot comme assistants, nous résolvons en heures
+                        ce qui prenait des semaines. Plus aucun défi n'est impossible à relever.
+                    </p>
+                    
+                    <ul class="ai-features">
+                        <li>
+                            <span class="icon">✨</span>
+                            <span>Reverse engineering assisté par IA</span>
+                        </li>
+                        <li>
+                            <span class="icon">🚀</span>
+                            <span>Génération de code PowerShell/Python optimisé</span>
+                        </li>
+                        <li>
+                            <span class="icon">🔍</span>
+                            <span>Analyse de logs et détection d'anomalies</span>
+                        </li>
+                        <li>
+                            <span class="icon">📚</span>
+                            <span>Documentation automatique des systèmes</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="ai-visual">
+                    <div class="ai-equation">
+                        <span>25 ans d'expertise</span>
+                        <span class="plus">+</span>
+                        <span>IA générative</span>
+                        <span class="equals">=</span>
+                        <span>∞ Possibilités</span>
+                    </div>
+                    <p style="color: var(--gray); margin-top: 2rem;">
+                        "L'IA ne remplace pas l'expert, elle le libère pour qu'il puisse
+                        se concentrer sur l'essentiel : résoudre vos défis impossibles."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Use Cases Section -->
+    <section class="use-cases" id="cases">
+        <div class="container">
+            <div class="section-header">
+                <h2>Cas Concrets : L'impossible rendu possible</h2>
+                <p class="subtitle">Quelques exemples où nous avons trouvé la solution quand tout semblait perdu</p>
+            </div>
+            
+            <div class="cases-grid">
+                <div class="case-card">
+                    <div class="case-icon">🏭</div>
+                    <h3>ERP SalesLogix abandonné</h3>
+                    <p>
+                        Système de 2000, code VBScript inmaintenable,
+                        3 prestataires ont abandonné, développeur parti.
+                    </p>
+                    <div class="solution">
+                        <strong>Notre solution :</strong> Reverse engineering complet,
+                        extraction des données, reconstruction des formulaires,
+                        migration progressive.
+                    </div>
+                </div>
+                
+                <div class="case-card">
+                    <div class="case-icon">🏛️</div>
+                    <h3>Durcissement AD Secteur Public</h3>
+                    <p>
+                        Mairie avec obligations ANSSI, AD vulnérable,
+                        non-conformité réglementaire, risque cyber élevé.
+                    </p>
+                    <div class="solution">
+                        <strong>Notre solution :</strong> HardenAD complet,
+                        conformité ANSSI/RGPD, migration 2022,
+                        audit trimestriel maintenu.
+                    </div>
+                </div>
+                
+                <div class="case-card">
+                    <div class="case-icon">🌐</div>
+                    <h3>Intégration impossible</h3>
+                    <p>
+                        Système AS400 des années 80 à connecter
+                        avec API REST moderne, formats incompatibles.
+                    </p>
+                    <div class="solution">
+                        <strong>Notre solution :</strong> Middleware PowerShell custom,
+                        transformation des données en temps réel,
+                        passerelle universelle entre systèmes hétérogènes.
+                    </div>
+                </div>
+                
+                <div class="case-card">
+                    <div class="case-icon">💾</div>
+                    <h3>Ransomware - Tout chiffré</h3>
+                    <p>
+                        Serveurs chiffrés, backups corrompus,
+                        Veeam mal configuré depuis 2 ans.
+                    </p>
+                    <div class="solution">
+                        <strong>Notre solution :</strong> Récupération depuis shadow copies oubliées,
+                        reconstruction AD depuis metadata, 
+                        nouveau PRA testé trimestriellement.
+                    </div>
+                </div>
+                
+                <div class="case-card">
+                    <div class="case-icon">📊</div>
+                    <h3>Performance SQL critique</h3>
+                    <p>
+                        Base SQL Server 2012, 500GB, temps de réponse 30s,
+                        DBA précédent a tout tenté.
+                    </p>
+                    <div class="solution">
+                        <strong>Notre solution :</strong> Extended Events personnalisés,
+                        identification requêtes cachées, index manquants,
+                        temps réduit à 0.5s.
+                    </div>
+                </div>
+                
+                <div class="case-card">
+                    <div class="case-icon">🏥</div>
+                    <h3>Hôpital - Sécurisation urgente</h3>
+                    <p>
+                        Infrastructure critique santé, exigences HDS,
+                        AD exposé, données patients à protéger.
+                    </p>
+                    <div class="solution">
+                        <strong>Notre solution :</strong> Durcissement AD urgent,
+                        segmentation réseau, conformité HDS,
+                        monitoring 24/7 avec Zabbix.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- International Section -->
+    <section class="international" id="international">
+        <div class="container">
+            <div class="section-header" style="color: white;">
+                <h2>Intervention 99% à distance</h2>
+                <p class="subtitle" style="color: rgba(255,255,255,0.8);">
+                    France • Monaco • Maroc • International
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Ils nous ont fait confiance</h2>
+                <p class="subtitle">Quand leur situation semblait désespérée</p>
+            </div>
+            
+            <div class="testimonial-card">
+                <p class="testimonial-text">
+                    "Après 3 prestataires qui ont abandonné notre projet, SYAGA a réussi :
+                    faire revivre notre système legacy et le moderniser progressivement."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">IND</div>
+                    <div class="author-info">
+                        <div class="name">Industrie</div>
+                        <div class="role">Client confidentiel</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <p class="testimonial-text">
+                    "Face aux exigences ANSSI, notre AD n'était pas conforme.
+                    SYAGA nous a mis aux normes en gardant tout opérationnel."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SP</div>
+                    <div class="author-info">
+                        <div class="name">Secteur Public</div>
+                        <div class="role">Collectivité territoriale</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Final CTA -->
+    <section class="final-cta" id="contact">
+        <div class="container">
+            <h2>Vous avez un défi impossible ?</h2>
+            <p>Là où les autres voient un problème, nous voyons une solution.</p>
+            
+            <a href="tel:+33412394816" class="btn btn-primary" style="background: white; color: var(--primary); font-size: 1.25rem; padding: 1rem 2rem;">
+                Parlons-en maintenant
+            </a>
+            
+            <div class="contact-direct">
+                <div class="contact-method">
+                    <span>📞</span>
+                    <span>04 12 39 48 16</span>
+                </div>
+                <div class="contact-method">
+                    <span>✉️</span>
+                    <span>contact@syaga.fr</span>
+                </div>
+                <div class="contact-method">
+                    <span>🌐</span>
+                    <span>99% Remote</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Mentions légales</a>
+                <a href="#">RGPD</a>
+                <a href="#">CGV</a>
+                <a href="https://github.com/SYAGA-CONSULTING">GitHub</a>
+                <a href="#">LinkedIn</a>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 SYAGA Consulting - L'expert que les experts appellent</p>
+                <p>25 ans d'expertise Microsoft | MCSE 2000 | Infrastructure & Cloud</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Tab switching
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(tabName + '-tab').style.display = 'block';
+            event.target.classList.add('active');
+        }
+        
+        // Auth modal (placeholder)
+        function showAuth() {
+            alert('Dashboard PRISM™ - Authentification Microsoft 365\n\nAccès réservé aux clients.\nContactez-nous pour obtenir vos accès.');
+        }
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // Animate on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        });
+        
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

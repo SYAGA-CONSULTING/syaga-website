@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYAGA - Infrastructure IT & Sécurité Active Directory</title>
+    <meta name="description" content="Expert infrastructure Microsoft. Durcissement Active Directory secteur public. Conformité ANSSI. 25 ans d'expérience.">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+        
+        .container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: #f8f8f8;
+            border-bottom: 1px solid #ddd;
+            padding: 20px 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: normal;
+            color: #000;
+            text-decoration: none;
+        }
+        
+        .contact-header {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Navigation */
+        nav {
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: #333;
+            text-decoration: none;
+        }
+        
+        nav a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Main Content */
+        main {
+            padding: 40px 0;
+        }
+        
+        h1 {
+            font-size: 28px;
+            font-weight: normal;
+            margin-bottom: 20px;
+            color: #000;
+        }
+        
+        h2 {
+            font-size: 20px;
+            font-weight: normal;
+            margin: 30px 0 15px;
+            color: #000;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+        
+        h3 {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 20px 0 10px;
+            color: #333;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            color: #444;
+        }
+        
+        .lead {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        /* Competences */
+        .competences {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .competence-block {
+            border-left: 3px solid #0066cc;
+            padding-left: 15px;
+        }
+        
+        .competence-block h3 {
+            margin-bottom: 10px;
+        }
+        
+        .competence-list {
+            list-style: none;
+            color: #666;
+            font-size: 13px;
+        }
+        
+        .competence-list li {
+            padding: 3px 0;
+        }
+        
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            text-align: left;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        
+        th {
+            background: #f8f8f8;
+            font-weight: normal;
+        }
+        
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 30px 0;
+        }
+        
+        .service {
+            padding: 20px;
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+        }
+        
+        .service h3 {
+            margin-bottom: 10px;
+        }
+        
+        .service ul {
+            list-style: none;
+            margin-left: 0;
+            color: #666;
+            font-size: 13px;
+        }
+        
+        .service li {
+            padding: 5px 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .service li:before {
+            content: "• ";
+            color: #0066cc;
+            margin-right: 5px;
+        }
+        
+        /* Contact */
+        .contact-section {
+            background: #f8f8f8;
+            padding: 30px;
+            margin: 40px 0;
+            border: 1px solid #ddd;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .contact-item {
+            font-size: 14px;
+        }
+        
+        .contact-item strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #000;
+        }
+        
+        /* Footer */
+        footer {
+            background: #333;
+            color: #999;
+            padding: 20px 0;
+            margin-top: 60px;
+            font-size: 12px;
+        }
+        
+        footer a {
+            color: #999;
+        }
+        
+        /* Utility */
+        .text-muted {
+            color: #999;
+            font-size: 13px;
+        }
+        
+        .mt-40 {
+            margin-top: 40px;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            background: #e5e5e5;
+            color: #666;
+            font-size: 11px;
+            margin-right: 5px;
+        }
+        
+        .badge-primary {
+            background: #0066cc;
+            color: white;
+        }
+        
+        .section {
+            margin: 40px 0;
+        }
+        
+        /* No fancy colors, no gradients, no shadows, no animations */
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">SYAGA</a>
+                <div class="contact-header">
+                    Tel: 04 12 39 48 16 | contact@syaga.fr
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#competences">Compétences</a></li>
+                <li><a href="#secteurs">Secteurs</a></li>
+                <li><a href="#references">Références</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Introduction -->
+            <section>
+                <h1>Infrastructure IT & Sécurité Active Directory</h1>
+                <p class="lead">
+                    Expert Microsoft depuis 25 ans. Spécialiste du durcissement Active Directory 
+                    pour le secteur public. Conformité ANSSI. Intervention à distance.
+                </p>
+                <p>
+                    SYAGA intervient sur les infrastructures critiques nécessitant une expertise 
+                    approfondie en environnement Microsoft. Notre approche pragmatique permet de 
+                    résoudre les problématiques complexes abandonnées par d'autres prestataires.
+                </p>
+            </section>
+            
+            <!-- Services -->
+            <section class="section" id="services">
+                <h2>Services</h2>
+                
+                <div class="services-grid">
+                    <div class="service">
+                        <h3>Active Directory & Sécurité</h3>
+                        <ul>
+                            <li>Durcissement AD (HardenAD)</li>
+                            <li>Conformité ANSSI secteur public</li>
+                            <li>Migration AD 2008/2012 vers 2019/2022</li>
+                            <li>Nettoyage et optimisation AD</li>
+                            <li>Audit de sécurité trimestriel</li>
+                            <li>GPO et stratégies de sécurité</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service">
+                        <h3>Infrastructure Microsoft</h3>
+                        <ul>
+                            <li>Microsoft 365 (Exchange, Teams, SharePoint)</li>
+                            <li>Virtualisation Hyper-V</li>
+                            <li>Migration on-premise vers cloud</li>
+                            <li>PowerShell automatisation</li>
+                            <li>ZTNA Microsoft Private Access</li>
+                            <li>Intune et gestion des devices</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service">
+                        <h3>Monitoring & Sauvegarde</h3>
+                        <ul>
+                            <li>Zabbix (90% de nos déploiements)</li>
+                            <li>Centreon entreprise</li>
+                            <li>Wazuh SIEM personnalisé</li>
+                            <li>Veeam Backup & Replication</li>
+                            <li>PRA/PCA avec tests trimestriels</li>
+                            <li>Réplication Hyper-V</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service">
+                        <h3>Services spécialisés</h3>
+                        <ul>
+                            <li>Reverse engineering code legacy</li>
+                            <li>Récupération systèmes abandonnés</li>
+                            <li>Intégration systèmes hétérogènes</li>
+                            <li>Migration SalesLogix</li>
+                            <li>Conformité HDS (hôpitaux)</li>
+                            <li>Support 99% remote</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Competences -->
+            <section class="section" id="competences">
+                <h2>Compétences techniques</h2>
+                
+                <div class="competences">
+                    <div class="competence-block">
+                        <h3>Microsoft</h3>
+                        <ul class="competence-list">
+                            <li>Active Directory - Expert</li>
+                            <li>Microsoft 365 - Expert</li>
+                            <li>Exchange 2010-2019 - Expert</li>
+                            <li>PowerShell - Expert</li>
+                            <li>Hyper-V - Expert</li>
+                            <li>Windows Server 2008-2022</li>
+                            <li>SQL Server 2012-2022</li>
+                            <li>MCSE 2000</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="competence-block">
+                        <h3>Virtualisation & Backup</h3>
+                        <ul class="competence-list">
+                            <li>Hyper-V - 100%</li>
+                            <li>VMware vSphere - 50%</li>
+                            <li>Proxmox - 10%</li>
+                            <li>Veeam - 99.9%</li>
+                            <li>Réplication - Expert</li>
+                            <li>PRA/PCA - Trimestriel</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="competence-block">
+                        <h3>Monitoring & Sécurité</h3>
+                        <ul class="competence-list">
+                            <li>Zabbix - 90%</li>
+                            <li>Centreon - 75%</li>
+                            <li>PRTG - 20%</li>
+                            <li>Wazuh SIEM - Custom</li>
+                            <li>HardenAD - Expert</li>
+                            <li>ANSSI - Conformité</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Secteurs -->
+            <section class="section" id="secteurs">
+                <h2>Secteurs d'intervention</h2>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Secteur</th>
+                            <th>Spécificités</th>
+                            <th>Conformité</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Mairies & Collectivités</strong></td>
+                            <td>Durcissement AD obligatoire, modernisation infrastructure</td>
+                            <td><span class="badge badge-primary">ANSSI</span> <span class="badge">RGPD</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hôpitaux</strong></td>
+                            <td>Infrastructure critique, protection données patients</td>
+                            <td><span class="badge badge-primary">HDS</span> <span class="badge">RGPD</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Industrie</strong></td>
+                            <td>Systèmes legacy, intégrations ERP, monitoring production</td>
+                            <td><span class="badge">ISO 27001</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>PME/ETI</strong></td>
+                            <td>Migration cloud, optimisation coûts, support externalisé</td>
+                            <td><span class="badge">RGPD</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <p class="text-muted mt-40">
+                    Intervention principalement à distance (99%). Zone géographique : France, Monaco, Maroc, International.
+                </p>
+            </section>
+            
+            <!-- References -->
+            <section class="section" id="references">
+                <h2>Cas d'usage</h2>
+                
+                <h3>Durcissement AD Secteur Public</h3>
+                <p>
+                    Mise en conformité ANSSI d'une infrastructure Active Directory municipale. 
+                    Migration de Windows Server 2008 vers 2022, application des recommandations 
+                    de sécurité, mise en place d'audits trimestriels.
+                </p>
+                
+                <h3>Récupération ERP abandonné</h3>
+                <p>
+                    Reverse engineering d'un système SalesLogix de 2000. Extraction et migration 
+                    des données après échec de trois prestataires. Reconstruction progressive 
+                    vers architecture moderne.
+                </p>
+                
+                <h3>Sécurisation urgente hôpital</h3>
+                <p>
+                    Durcissement AD en urgence suite à audit. Mise en conformité HDS, 
+                    segmentation réseau, monitoring 24/7 avec Zabbix. Zéro interruption de service.
+                </p>
+            </section>
+            
+            <!-- Contact -->
+            <section class="contact-section" id="contact">
+                <h2>Contact</h2>
+                
+                <p>Pour toute demande d'intervention ou d'audit :</p>
+                
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <strong>Téléphone</strong>
+                        04 12 39 48 16
+                    </div>
+                    <div class="contact-item">
+                        <strong>Email</strong>
+                        contact@syaga.fr
+                    </div>
+                    <div class="contact-item">
+                        <strong>Intervention</strong>
+                        99% Remote
+                    </div>
+                </div>
+                
+                <p class="text-muted mt-40">
+                    Réponse sous 24h. Intervention rapide. Devis gratuit.
+                </p>
+            </section>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            © 2025 SYAGA - Expert Infrastructure Microsoft depuis 25 ans | 
+            <a href="#">Mentions légales</a> | 
+            <a href="#">RGPD</a>
+        </div>
+    </footer>
+</body>
+</html>
