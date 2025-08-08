@@ -491,33 +491,44 @@
             color: var(--orange);
         }
         
-        /* Testimonials */
+        /* Témoignages Compact from V12 */
         .testimonials-section {
-            padding: 80px 20px;
-            background: var(--bg-light);
+            padding: 60px 20px;
+            background: white;
         }
         
         .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
             max-width: 1100px;
             margin: 0 auto;
         }
         
         .testimonial-card {
-            background: white;
-            padding: 30px;
+            background: #f8f9fa;
+            padding: 25px;
             border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 60px;
+            color: var(--blue);
+            opacity: 0.2;
         }
         
         .testimonial-text {
-            font-style: italic;
-            color: var(--dark);
+            font-size: 14px;
             line-height: 1.6;
+            color: var(--dark);
             margin-bottom: 20px;
-            font-size: 15px;
+            position: relative;
+            z-index: 1;
         }
         
         .testimonial-author {
@@ -526,9 +537,9 @@
             gap: 15px;
         }
         
-        .testimonial-avatar {
-            width: 45px;
-            height: 45px;
+        .author-avatar {
+            width: 40px;
+            height: 40px;
             background: var(--blue);
             border-radius: 50%;
             display: flex;
@@ -536,19 +547,22 @@
             justify-content: center;
             color: white;
             font-weight: bold;
-            font-size: 16px;
-        }
-        
-        .testimonial-info h4 {
             font-size: 14px;
-            color: var(--navy);
-            margin-bottom: 2px;
-            font-weight: 600;
         }
         
-        .testimonial-info .role {
-            font-size: 12px;
+        .author-info {
+            font-size: 13px;
+        }
+        
+        .author-name {
+            color: var(--navy);
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .author-role {
             color: var(--gray);
+            font-size: 12px;
         }
         
         /* Clients */
@@ -921,10 +935,10 @@
                         "Migration AD réussie après 3 échecs avec d'autres prestataires. SYAGA a trouvé la solution en 48h."
                     </div>
                     <div class="testimonial-author">
-                        <div class="testimonial-avatar">JD</div>
-                        <div class="testimonial-info">
-                            <h4>Jean Dupont</h4>
-                            <div class="role">DSI • Mairie 5000 habitants</div>
+                        <div class="author-avatar">JD</div>
+                        <div class="author-info">
+                            <div class="author-name">Jean Dupont</div>
+                            <div class="author-role">DSI • Mairie 5000 habitants</div>
                         </div>
                     </div>
                 </div>
@@ -934,10 +948,10 @@
                         "Économies de 85% en passant à Nextcloud. Migration sans interruption de service."
                     </div>
                     <div class="testimonial-author">
-                        <div class="testimonial-avatar">ML</div>
-                        <div class="testimonial-info">
-                            <h4>Marie Lambert</h4>
-                            <div class="role">Directrice • Hôpital</div>
+                        <div class="author-avatar">ML</div>
+                        <div class="author-info">
+                            <div class="author-name">Marie Lambert</div>
+                            <div class="author-role">Directrice • Hôpital</div>
                         </div>
                     </div>
                 </div>
@@ -947,10 +961,10 @@
                         "Support exceptionnel. Problème critique résolu rapidement. Merci SYAGA !"
                     </div>
                     <div class="testimonial-author">
-                        <div class="testimonial-avatar">PB</div>
-                        <div class="testimonial-info">
-                            <h4>Pierre Bernard</h4>
-                            <div class="role">CTO • Industrie</div>
+                        <div class="author-avatar">PB</div>
+                        <div class="author-info">
+                            <div class="author-name">Pierre Bernard</div>
+                            <div class="author-role">CTO • Industrie</div>
                         </div>
                     </div>
                 </div>
@@ -985,28 +999,6 @@
                 <p>Microsoft, Open Source ou hybride : nous avons la solution</p>
             </div>
             
-            <div class="contact-grid">
-                <div class="contact-item">
-                    <div class="contact-item-icon">📞</div>
-                    <h3>Téléphone</h3>
-                    <p><a href="tel:0412394816">04 12 39 48 16</a></p>
-                    <p>Ligne directe</p>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-item-icon">✉️</div>
-                    <h3>Email</h3>
-                    <p><a href="mailto:contact@syaga.fr">contact@syaga.fr</a></p>
-                    <p>Réponse en 24h</p>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-item-icon">🌍</div>
-                    <h3>Intervention</h3>
-                    <p>99% Remote</p>
-                    <p>France & International</p>
-                </div>
-            </div>
         </div>
     </section>
     
