@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYAGA - Expert Infrastructure Microsoft & Solutions Souveraines</title>
+    <meta name="description" content="25 ans d'expertise Microsoft + Open Source. Active Directory, solutions souveraines, secteur public. Là où les autres abandonnent, SYAGA trouve la solution.">
+    <meta name="keywords" content="Active Directory, Microsoft 365, HardenAD, ANSSI, solutions souveraines, Linux, Nextcloud, Zimbra, infrastructure IT">
+    <meta property="og:title" content="SYAGA - Expert Infrastructure IT">
+    <meta property="og:description" content="Double expertise Microsoft + Solutions Souveraines. 25 ans d'expérience.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.syaga.fr">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --navy: #1e3a5f;
+            --blue: #4a90e2;
+            --green: #27ae60;
+            --orange: #e67e22;
+            --gray: #7f8c8d;
+            --light: #ecf0f1;
+            --white: #ffffff;
+            --dark: #2c3e50;
+            --bg-light: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--bg-light);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: baseline;
+            gap: 15px;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--navy);
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+        
+        .tagline {
+            font-size: 13px;
+            color: var(--gray);
+            font-style: italic;
+        }
+        
+        .header-contact {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .phone-link {
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .phone-link:hover {
+            color: #229954;
+        }
+        
+        .email-link {
+            color: var(--navy);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .email-link:hover {
+            color: var(--blue);
+        }
+        
+        /* Hero Section EXACT from V10 */
+        .hero {
+            background: var(--navy);
+            color: white;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(74,144,226,0.3) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-text h1 {
+            font-size: 38px;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .hero-text h1 strong {
+            font-weight: 700;
+            color: var(--blue);
+        }
+        
+        .hero-text p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .hero-bullets {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .hero-bullets li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .hero-bullets li:before {
+            content: "✓";
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: var(--green);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            flex-shrink: 0;
+        }
+        
+        .hero-visual {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--blue);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+        
+        /* Section Équipe from V10 */
+        .team-section {
+            padding: 60px 20px;
+            background: white;
+        }
+        
+        .team-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .team-header h2 {
+            font-size: 32px;
+            font-weight: 300;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+        
+        .team-header p {
+            color: var(--gray);
+            font-size: 16px;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .team-member {
+            text-align: center;
+            background: #f8f9fa;
+            padding: 30px 20px;
+            border-radius: 10px;
+            border-top: 4px solid var(--blue);
+        }
+        
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--blue), var(--navy));
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .team-member h3 {
+            font-size: 18px;
+            color: var(--navy);
+            margin-bottom: 5px;
+        }
+        
+        .team-role {
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .team-specialties {
+            list-style: none;
+            font-size: 13px;
+        }
+        
+        .team-specialties li {
+            padding: 3px 0;
+            color: var(--dark);
+        }
+        
+        .team-specialties li:before {
+            content: "▸";
+            color: var(--blue);
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        /* Double Compétence from V12-compact */
+        .competence-section {
+            padding: 60px 20px;
+            background: var(--bg-light);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-header h2 {
+            font-size: 32px;
+            font-weight: 300;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            font-size: 16px;
+        }
+        
+        .competence-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .competence-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            border-top: 4px solid var(--blue);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .competence-card.sovereign {
+            border-top-color: var(--green);
+        }
+        
+        .competence-card h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--navy);
+        }
+        
+        .competence-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .competence-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 14px;
+        }
+        
+        .competence-item:before {
+            content: "✓";
+            color: var(--green);
+            font-weight: bold;
+            margin-top: 2px;
+        }
+        
+        .certification-highlight {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 15px;
+        }
+        
+        /* Services Section from V12-compact */
+        .services-section {
+            padding: 60px 20px;
+            background: var(--bg-light);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--blue);
+        }
+        
+        .service-card.sovereign::before {
+            background: var(--green);
+        }
+        
+        .service-card.hybrid::before {
+            background: var(--orange);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+        
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--blue), var(--navy));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .service-card.sovereign .service-icon {
+            background: linear-gradient(135deg, var(--green), #1e7e34);
+        }
+        
+        .service-card.hybrid .service-icon {
+            background: linear-gradient(135deg, var(--orange), #d35400);
+        }
+        
+        .service-card h3 {
+            font-size: 20px;
+            color: var(--navy);
+            margin-bottom: 15px;
+        }
+        
+        .service-card p {
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .service-list {
+            list-style: none;
+        }
+        
+        .service-list li {
+            padding: 8px 0;
+            font-size: 13px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .service-list li:before {
+            content: "→";
+            color: var(--blue);
+            font-weight: bold;
+        }
+        
+        .service-card.sovereign .service-list li:before {
+            color: var(--green);
+        }
+        
+        .service-card.hybrid .service-list li:before {
+            color: var(--orange);
+        }
+        
+        /* Testimonials */
+        .testimonials-section {
+            padding: 80px 20px;
+            background: var(--bg-light);
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: var(--dark);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .testimonial-avatar {
+            width: 45px;
+            height: 45px;
+            background: var(--blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .testimonial-info h4 {
+            font-size: 14px;
+            color: var(--navy);
+            margin-bottom: 2px;
+            font-weight: 600;
+        }
+        
+        .testimonial-info .role {
+            font-size: 12px;
+            color: var(--gray);
+        }
+        
+        /* Clients */
+        .clients-section {
+            padding: 80px 20px;
+            background: white;
+        }
+        
+        .clients-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            opacity: 0.7;
+        }
+        
+        .client-logo {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        /* Contact Simple */
+        .contact-section {
+            background: var(--navy);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .contact-header h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-header p {
+            font-size: 20px;
+            opacity: 0.95;
+            margin-bottom: 50px;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-item {
+            text-align: center;
+        }
+        
+        .contact-item-icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+        
+        .contact-item h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .contact-item p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer from V10 */
+        footer {
+            background: #1a2b3d;
+            color: white;
+            padding: 50px 20px 20px;
+            font-size: 14px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+        }
+        
+        .footer-section h4 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section li {
+            padding: 5px 0;
+            opacity: 0.8;
+        }
+        
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-section a:hover {
+            opacity: 1;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 13px;
+            opacity: 0.8;
+        }
+        
+        .footer-bottom a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .hero-content { grid-template-columns: 1fr; }
+            .competence-grid { grid-template-columns: 1fr; }
+            .services-categories { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .team-grid { grid-template-columns: 1fr; }
+            .header-contact { flex-direction: column; gap: 10px; }
+            .phone-link { font-size: 16px; }
+            .hero-cta { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 300px; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <a href="/" class="logo">SYAGA</a>
+                    <span class="tagline">Partenaire IT dans toute la France</span>
+                </div>
+                <div class="header-contact">
+                    <a href="tel:0412394816" class="phone-link">
+                        📞 04 12 39 48 16
+                    </a>
+                    <a href="mailto:contact@syaga.fr" class="email-link">
+                        ✉️ contact@syaga.fr
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section EXACT from V10 -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Là où les autres <strong>abandonnent</strong>,<br>nous trouvons la solution</h1>
+                <p>En combinant notre expertise de 25 ans et l'IA générative d'aujourd'hui,<br>
+                plus aucun défi n'est impossible.</p>
+                
+                <ul class="hero-bullets">
+                    <li>Microsoft expert + Solutions souveraines Linux</li>
+                    <li>Durcissement AD conforme ANSSI</li>
+                    <li>IA générative : Claude, Copilot, automatisation intelligente</li>
+                    <li>25 ans d'expertise amplifiée par l'IA = Zéro limite</li>
+                </ul>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">25</div>
+                        <div class="stat-label">Ans d'expertise</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Projets réalisés</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Remote possible</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">99%</div>
+                        <div class="stat-label">Taux de réussite</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Section Équipe from V10 -->
+    <section class="team-section" id="equipe">
+        <div class="container">
+            <div class="team-header">
+                <h2>Une équipe d'experts nommément identifiés</h2>
+                <p>15+ années d'expérience • Professionnels certifiés • Expertise reconnue</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-avatar">SQ</div>
+                    <h3>Sébastien QUESTIER</h3>
+                    <div class="team-role">Fondateur & Expert Réseau</div>
+                    <ul class="team-specialties">
+                        <li>Ingénieur système certifié Microsoft depuis 25 ans</li>
+                        <li>Active Directory Expert</li>
+                        <li>Architecture Microsoft</li>
+                        <li>25 ans d'expérience</li>
+                    </ul>
+                </div>
+                
+                <div class="team-member">
+                    <div class="team-avatar">RB</div>
+                    <h3>Romain BASTIEN</h3>
+                    <div class="team-role">Admin. Systèmes & Réseaux</div>
+                    <ul class="team-specialties">
+                        <li>Infrastructure Microsoft</li>
+                        <li>Solutions hybrides</li>
+                        <li>Virtualisation</li>
+                        <li>Support technique</li>
+                    </ul>
+                </div>
+                
+                <div class="team-member">
+                    <div class="team-avatar">HJ</div>
+                    <h3>Hugo JOUCLA</h3>
+                    <div class="team-role">Admin. Systèmes & Cybersécurité</div>
+                    <ul class="team-specialties">
+                        <li>Sécurité informatique</li>
+                        <li>Durcissement AD</li>
+                        <li>Conformité ANSSI</li>
+                        <li>Solutions souveraines</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Double Compétence from V12-compact -->
+    <section class="competence-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Double Compétence : Microsoft & Open Source</h2>
+                <p>Liberté de choix • Solutions sur mesure • Souveraineté numérique</p>
+            </div>
+            
+            <div class="competence-grid">
+                <div class="competence-card">
+                    <h3>
+                        <span style="color: var(--blue);">🔷</span> Expertise Microsoft
+                    </h3>
+                    <div class="competence-list">
+                        <div class="competence-item">Active Directory Expert</div>
+                        <div class="competence-item">Microsoft 365 & Azure</div>
+                        <div class="competence-item">Exchange & SharePoint</div>
+                        <div class="competence-item">Hyper-V (100%)</div>
+                        <div class="competence-item">PowerShell Automation</div>
+                        <div class="competence-item">Intune MDM</div>
+                        <div class="competence-item">HardenAD ANSSI</div>
+                        <div class="competence-item">SQL Server</div>
+                    </div>
+                    <span class="certification-highlight">Ingénieur certifié Microsoft depuis 25 ans</span>
+                </div>
+                
+                <div class="competence-card sovereign">
+                    <h3>
+                        <span style="color: var(--green);">🐧</span> Solutions Souveraines
+                    </h3>
+                    <div class="competence-list">
+                        <div class="competence-item">Linux (Debian, Ubuntu)</div>
+                        <div class="competence-item">Nextcloud (GAFAM-free)</div>
+                        <div class="competence-item">Zimbra Mail</div>
+                        <div class="competence-item">Proxmox VE</div>
+                        <div class="competence-item">Zabbix & Prometheus</div>
+                        <div class="competence-item">LibreOffice Migration</div>
+                        <div class="competence-item">Solutions françaises</div>
+                        <div class="competence-item">RGPD & Souveraineté</div>
+                    </div>
+                    <span class="certification-highlight" style="background: linear-gradient(135deg, #27ae60, #1e7e34);">100% Souverain</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section from V12-compact -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Services & Solutions</h2>
+                <p>L'expertise qu'il vous faut, exactement comme vous en avez besoin</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🏢</div>
+                    <h3>Infrastructure Microsoft</h3>
+                    <p>25 ans d'expertise pure Microsoft. Nous maîtrisons tout.</p>
+                    <ul class="service-list">
+                        <li>Active Directory & Azure AD</li>
+                        <li>Microsoft 365 complet</li>
+                        <li>Hyper-V & SQL Server</li>
+                        <li>Intune MDM & Security</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card sovereign">
+                    <div class="service-icon">🛡️</div>
+                    <h3>Solutions Souveraines</h3>
+                    <p>Indépendance technologique avec solutions européennes.</p>
+                    <ul class="service-list">
+                        <li>Nextcloud & Zimbra</li>
+                        <li>Linux Enterprise</li>
+                        <li>Proxmox VE</li>
+                        <li>100% RGPD & ANSSI</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card hybrid">
+                    <div class="service-icon">🔄</div>
+                    <h3>Services Spécialisés</h3>
+                    <p>L'impossible devient possible. Nous trouvons toujours.</p>
+                    <ul class="service-list">
+                        <li>Migration O365 → Souverain</li>
+                        <li>Durcissement AD (HardenAD)</li>
+                        <li>Reverse Engineering</li>
+                        <li>Support Critique</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Témoignages from V12-compact -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Ils nous font confiance</h2>
+                <p>500+ projets réussis en 25 ans</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Migration AD réussie après 3 échecs avec d'autres prestataires. SYAGA a trouvé la solution en 48h."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">JD</div>
+                        <div class="testimonial-info">
+                            <h4>Jean Dupont</h4>
+                            <div class="role">DSI • Mairie 5000 habitants</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Économies de 85% en passant à Nextcloud. Migration sans interruption de service."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">ML</div>
+                        <div class="testimonial-info">
+                            <h4>Marie Lambert</h4>
+                            <div class="role">Directrice • Hôpital</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Support exceptionnel. Problème critique résolu rapidement. Merci SYAGA !"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">PB</div>
+                        <div class="testimonial-info">
+                            <h4>Pierre Bernard</h4>
+                            <div class="role">CTO • Industrie</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Clients -->
+    <section class="clients-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nos Références</h2>
+                <p>Secteur public, santé, industrie, services</p>
+            </div>
+            
+            <div class="clients-logos">
+                <span class="client-logo">Mairies</span>
+                <span class="client-logo">Hôpitaux</span>
+                <span class="client-logo">Industries</span>
+                <span class="client-logo">ETI</span>
+                <span class="client-logo">Écoles</span>
+                <span class="client-logo">Ministères</span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-header">
+                <h2>Un Défi Impossible ? Parlons-en.</h2>
+                <p>Microsoft, Open Source ou hybride : nous avons la solution</p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-item-icon">📞</div>
+                    <h3>Téléphone</h3>
+                    <p><a href="tel:0412394816">04 12 39 48 16</a></p>
+                    <p>Ligne directe</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-item-icon">✉️</div>
+                    <h3>Email</h3>
+                    <p><a href="mailto:contact@syaga.fr">contact@syaga.fr</a></p>
+                    <p>Réponse en 24h</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-item-icon">🌍</div>
+                    <h3>Intervention</h3>
+                    <p>99% Remote</p>
+                    <p>France & International</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer from V10 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>SYAGA Consulting</h4>
+                    <ul>
+                        <li>25 ans d'expertise</li>
+                        <li>Expert Microsoft & Open Source</li>
+                        <li>Ingénieur système certifié Microsoft depuis 25 ans</li>
+                        <li>500+ projets réalisés</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">Infrastructure Microsoft</a></li>
+                        <li><a href="#services">Solutions Souveraines</a></li>
+                        <li><a href="#services">Services Spécialisés</a></li>
+                        <li><a href="#contact">Support Critique</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Zones PACA</h4>
+                    <ul>
+                        <li>📍 Port-de-Bouc</li>
+                        <li>📍 Nîmes</li>
+                        <li>📍 Saint-Andiol</li>
+                        <li>🌐 Toute la France</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Ressources</h4>
+                    <ul>
+                        <li><a href="#">Guide HardenAD</a></li>
+                        <li><a href="#">Checklist Migration</a></li>
+                        <li><a href="#">Souveraineté Numérique</a></li>
+                        <li><a href="#contact">Diagnostic Gratuit</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                © 2025 SYAGA - Expert Infrastructure Microsoft & Solutions Souveraines depuis 25 ans | 
+                <a href="#">Mentions légales</a> | 
+                <a href="#">RGPD</a> | 
+                <a href="#">CGV</a> | 
+                France • Monaco • Maroc • International
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
