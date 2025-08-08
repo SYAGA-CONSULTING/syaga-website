@@ -1,0 +1,2046 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYAGA - Expert Infrastructure Microsoft & Solutions Souveraines | Partenaire IT France</title>
+    <meta name="description" content="25 ans d'expertise Microsoft + Open Source. Active Directory, solutions souveraines, secteur public. Support 24/7, équipe d'experts certifiés. Calculateur ROI gratuit.">
+    <meta name="keywords" content="Active Directory, Microsoft 365, HardenAD, ANSSI, solutions souveraines, Linux, Nextcloud, Zimbra, infrastructure IT, secteur public, PACA">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --navy: #1e3a5f;
+            --blue: #4a90e2;
+            --green: #27ae60;
+            --orange: #e67e22;
+            --gray: #7f8c8d;
+            --light: #ecf0f1;
+            --white: #ffffff;
+            --dark: #2c3e50;
+            --red: #e74c3c;
+            --gold: #f39c12;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--dark);
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Top Bar avec Badges */
+        .top-bar {
+            background: var(--navy);
+            color: white;
+            padding: 8px 0;
+            font-size: 13px;
+        }
+        
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .top-info {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .portal-access {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .portal-btn {
+            padding: 5px 15px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s;
+            font-size: 12px;
+        }
+        
+        .portal-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .support-badge {
+            background: var(--green);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 11px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .guarantee-badges {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .guarantee-badge {
+            background: rgba(255,255,255,0.1);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Header Principal */
+        header {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--navy);
+            letter-spacing: -1px;
+        }
+        
+        .cert-badge {
+            background: linear-gradient(135deg, var(--blue) 0%, var(--navy) 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .tagline {
+            font-size: 13px;
+            color: var(--gray);
+            font-style: italic;
+        }
+        
+        .main-nav {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .main-nav a {
+            color: var(--navy);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .main-nav a:hover {
+            color: var(--blue);
+            border-bottom-color: var(--blue);
+        }
+        
+        .cta-phone {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: var(--green);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        
+        .cta-phone:hover {
+            background: #229954;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* Trust Badges Bar */
+        .trust-bar {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 15px 0;
+        }
+        
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .trust-badge:hover {
+            opacity: 1;
+        }
+        
+        .trust-badge img {
+            height: 35px;
+            filter: grayscale(100%);
+            transition: filter 0.3s;
+        }
+        
+        .trust-badge:hover img {
+            filter: grayscale(0%);
+        }
+        
+        /* Hero Section V4 Style avec Vidéo */
+        .hero {
+            background: var(--navy);
+            color: white;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(74,144,226,0.3) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-text h1 {
+            font-size: 38px;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .hero-text h1 strong {
+            font-weight: 700;
+            color: var(--blue);
+        }
+        
+        .hero-text p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .hero-bullets {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .hero-bullets li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .hero-bullets li:before {
+            content: "✓";
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: var(--green);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            flex-shrink: 0;
+        }
+        
+        .hero-cta-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn-primary {
+            padding: 12px 25px;
+            background: var(--green);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary:hover {
+            background: #229954;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .btn-secondary {
+            padding: 12px 25px;
+            background: transparent;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            border: 2px solid white;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: var(--navy);
+        }
+        
+        .hero-visual {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .video-container {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .video-placeholder {
+            background: var(--dark);
+            padding: 40px;
+            text-align: center;
+            border-radius: 8px;
+        }
+        
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: var(--green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .play-button:hover {
+            transform: scale(1.1);
+            background: #229954;
+        }
+        
+        .play-button::after {
+            content: "▶";
+            color: white;
+            font-size: 30px;
+            margin-left: 5px;
+        }
+        
+        /* Calculateur ROI Section */
+        .roi-section {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .roi-calculator {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .roi-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .roi-header h2 {
+            font-size: 32px;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+        
+        .roi-header p {
+            color: var(--gray);
+            font-size: 16px;
+        }
+        
+        .roi-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .roi-input-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .roi-input-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+        
+        .roi-input-group input,
+        .roi-input-group select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .roi-slider {
+            width: 100%;
+            margin: 10px 0;
+        }
+        
+        .roi-results {
+            background: linear-gradient(135deg, var(--green) 0%, #1e7e34 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .roi-amount {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .roi-percentage {
+            font-size: 24px;
+            opacity: 0.9;
+        }
+        
+        .roi-cta {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        /* Section Équipe avec Photos */
+        .team-section {
+            padding: 60px 20px;
+            background: #f8f9fa;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-header h2 {
+            font-size: 36px;
+            font-weight: 300;
+            color: var(--navy);
+            margin-bottom: 15px;
+        }
+        
+        .section-header p {
+            font-size: 18px;
+            color: var(--gray);
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .team-member {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--blue) 0%, var(--navy) 100%);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+        }
+        
+        .member-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 5px;
+        }
+        
+        .member-role {
+            color: var(--blue);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .member-certifications {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .cert-chip {
+            background: var(--light);
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            color: var(--gray);
+        }
+        
+        /* Timeline Projets Récents */
+        .timeline-section {
+            padding: 60px 20px;
+            background: white;
+        }
+        
+        .timeline-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--light);
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .timeline-content {
+            flex: 1;
+            padding: 20px 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            margin: 0 20px;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--blue);
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-date {
+            font-size: 12px;
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+        
+        .timeline-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+        
+        .timeline-description {
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        .timeline-tags {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        
+        .timeline-tag {
+            background: var(--light);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            color: var(--gray);
+        }
+        
+        /* Double Compétence Section */
+        .competence-section {
+            padding: 60px 20px;
+            background: #f8f9fa;
+        }
+        
+        /* Services Grid PRO */
+        .services-section {
+            padding: 80px 20px;
+            background: #f8f9fa;
+        }
+        
+        .services-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .services-header h2 {
+            font-size: 36px;
+            font-weight: 300;
+            color: var(--navy);
+            margin-bottom: 15px;
+        }
+        
+        .services-header p {
+            color: var(--gray);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .services-categories {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .service-category {
+            background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--blue) 0%, var(--navy) 100%);
+        }
+        
+        .service-category.sovereign::before {
+            background: linear-gradient(90deg, var(--green) 0%, #1e7e34 100%);
+        }
+        
+        .service-category.hybrid::before {
+            background: linear-gradient(90deg, var(--orange) 0%, #d35400 100%);
+        }
+        
+        .service-category:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        }
+        
+        .service-category-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--blue) 0%, var(--navy) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .service-category.sovereign .service-category-icon {
+            background: linear-gradient(135deg, var(--green) 0%, #1e7e34 100%);
+        }
+        
+        .service-category.hybrid .service-category-icon {
+            background: linear-gradient(135deg, var(--orange) 0%, #d35400 100%);
+        }
+        
+        .service-category h3 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 15px;
+        }
+        
+        .service-category-desc {
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        
+        .service-list {
+            list-style: none;
+        }
+        
+        .service-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            font-size: 14px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        
+        .service-list li:hover {
+            color: var(--blue);
+            padding-left: 8px;
+        }
+        
+        .service-list li:before {
+            content: "▸";
+            color: var(--blue);
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .service-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(74,144,226,0.1);
+            color: var(--blue);
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+        
+        /* Témoignages avec Logos */
+        .testimonials-section {
+            padding: 60px 20px;
+            background: white;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 30px;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .testimonial-card:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(-3px);
+        }
+        
+        .testimonial-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--gray);
+        }
+        
+        .author-info h4 {
+            font-size: 16px;
+            color: var(--navy);
+            margin-bottom: 2px;
+        }
+        
+        .author-info p {
+            font-size: 13px;
+            color: var(--gray);
+        }
+        
+        .company-logo {
+            height: 30px;
+            opacity: 0.6;
+        }
+        
+        .testimonial-rating {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 15px;
+        }
+        
+        .star {
+            color: var(--gold);
+            font-size: 16px;
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            color: var(--dark);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial-date {
+            font-size: 12px;
+            color: var(--gray);
+            text-align: right;
+        }
+        
+        /* Blog Preview Section */
+        .blog-section {
+            padding: 60px 20px;
+            background: #f8f9fa;
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .blog-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .blog-image {
+            height: 180px;
+            background: linear-gradient(135deg, var(--blue) 0%, var(--navy) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+        }
+        
+        .blog-content {
+            padding: 25px;
+        }
+        
+        .blog-category {
+            background: var(--light);
+            color: var(--gray);
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .blog-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        
+        .blog-excerpt {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .blog-link {
+            color: var(--blue);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .blog-link:hover {
+            gap: 10px;
+        }
+        
+        /* Contact avec Formulaire Qualifié */
+        .contact-section {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, var(--navy) 0%, #003d82 100%);
+            color: white;
+        }
+        
+        .contact-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+        
+        .contact-info h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .contact-details h4 {
+            font-size: 16px;
+            margin-bottom: 3px;
+        }
+        
+        .contact-details p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .contact-form {
+            background: white;
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .form-header h3 {
+            font-size: 24px;
+            color: var(--navy);
+            margin-bottom: 5px;
+        }
+        
+        .form-header p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .urgency-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        
+        .urgency-option {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .urgency-option:hover {
+            border-color: var(--blue);
+            background: #f0f8ff;
+        }
+        
+        .urgency-option.selected {
+            border-color: var(--blue);
+            background: var(--blue);
+            color: white;
+        }
+        
+        .form-submit {
+            width: 100%;
+            padding: 15px;
+            background: var(--green);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .form-submit:hover {
+            background: #229954;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* Footer Enrichi */
+        footer {
+            background: #1a2b3d;
+            color: white;
+            padding: 40px 20px 20px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h4 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 14px;
+            display: block;
+            padding: 5px 0;
+            transition: all 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .download-item {
+            background: rgba(255,255,255,0.05);
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        
+        .download-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        /* Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+        
+        .chat-button {
+            width: 60px;
+            height: 60px;
+            background: var(--green);
+            border-radius: 50%;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .chat-button:hover {
+            transform: scale(1.1);
+            background: #229954;
+        }
+        
+        .chat-pulse {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 15px;
+            height: 15px;
+            background: var(--red);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content { grid-template-columns: 1fr; }
+            .roi-form { grid-template-columns: 1fr; }
+            .team-grid { grid-template-columns: 1fr; }
+            .services-categories { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .blog-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; }
+            .main-nav { display: none; }
+            .trust-badges { gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar avec Garanties -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-info">
+                    <span>📍 France • Monaco • Maroc • International</span>
+                    <span>📧 contact@syaga.fr</span>
+                    <span class="support-badge">🔥 Support 24/7</span>
+                </div>
+                <div class="portal-access">
+                    <div class="guarantee-badges">
+                        <span class="guarantee-badge">✅ Intervention 24h</span>
+                        <span class="guarantee-badge">✅ Satisfaction garantie</span>
+                        <span class="guarantee-badge">✅ Support 30 jours</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Header Principal avec Badge Certification -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <span class="logo">SYAGA</span>
+                    <span class="cert-badge">🏆 Ingénieur Microsoft Certifié</span>
+                    <span class="tagline">Partenaire IT dans toute la France</span>
+                </div>
+                <nav class="main-nav">
+                    <a href="#roi">Calculateur ROI</a>
+                    <a href="#services">Services</a>
+                    <a href="#team">Équipe</a>
+                    <a href="#blog">Ressources</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+                <a href="tel:0412394816" class="cta-phone">
+                    📞 04 12 39 48 16
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Trust Badges Bar -->
+    <div class="trust-bar">
+        <div class="container">
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='35'%3E%3Crect width='100' height='35' fill='%234a90e2'/%3E%3Ctext x='50' y='22' text-anchor='middle' fill='white' font-size='12' font-family='Arial'%3EMicrosoft%3C/text%3E%3C/svg%3E" alt="Microsoft Partner">
+                </div>
+                <div class="trust-badge">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='35'%3E%3Crect width='80' height='35' fill='%2327ae60'/%3E%3Ctext x='40' y='22' text-anchor='middle' fill='white' font-size='12' font-family='Arial'%3EANSSI%3C/text%3E%3C/svg%3E" alt="ANSSI">
+                </div>
+                <div class="trust-badge">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='35'%3E%3Crect width='80' height='35' fill='%23e67e22'/%3E%3Ctext x='40' y='22' text-anchor='middle' fill='white' font-size='12' font-family='Arial'%3ERGPD%3C/text%3E%3C/svg%3E" alt="RGPD">
+                </div>
+                <div class="trust-badge">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='35'%3E%3Crect width='100' height='35' fill='%231e3a5f'/%3E%3Ctext x='50' y='22' text-anchor='middle' fill='white' font-size='12' font-family='Arial'%3ENextcloud%3C/text%3E%3C/svg%3E" alt="Nextcloud">
+                </div>
+                <div class="trust-badge">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='35'%3E%3Crect width='80' height='35' fill='%237f8c8d'/%3E%3Ctext x='40' y='22' text-anchor='middle' fill='white' font-size='12' font-family='Arial'%3EVeeam%3C/text%3E%3C/svg%3E" alt="Veeam">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hero Section avec Vidéo et Multi-CTA -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Là où les autres <strong>abandonnent</strong>,<br>nous trouvons la solution</h1>
+                <p>En combinant notre expertise de 25 ans et l'IA générative d'aujourd'hui,<br>
+                plus aucun défi n'est impossible.</p>
+                
+                <ul class="hero-bullets">
+                    <li>Microsoft expert + Solutions souveraines Linux</li>
+                    <li>Durcissement AD conforme ANSSI</li>
+                    <li>IA générative : Claude, Copilot, automatisation intelligente</li>
+                    <li>25 ans d'expertise amplifiée par l'IA = Zéro limite</li>
+                </ul>
+                
+                <div class="hero-cta-group">
+                    <a href="#roi" class="btn-primary">💰 Calculer vos économies</a>
+                    <a href="#video" class="btn-secondary">▶ Voir la vidéo</a>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="video-container">
+                    <div class="video-placeholder" id="video">
+                        <div class="play-button"></div>
+                        <p style="color: white; opacity: 0.9;">Découvrez SYAGA en 2 minutes</p>
+                        <p style="color: white; opacity: 0.7; font-size: 14px;">Notre approche unique Microsoft + Open Source</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Calculateur ROI -->
+    <section class="roi-section" id="roi">
+        <div class="container">
+            <div class="roi-calculator">
+                <div class="roi-header">
+                    <h2>Calculateur d'économies Microsoft vs Open Source</h2>
+                    <p>Découvrez combien vous pourriez économiser avec une solution hybride ou souveraine</p>
+                </div>
+                
+                <div class="roi-form">
+                    <div class="roi-input-group">
+                        <label>Nombre d'utilisateurs</label>
+                        <input type="number" id="users" value="100" min="10" max="10000">
+                        <input type="range" class="roi-slider" min="10" max="1000" value="100" oninput="document.getElementById('users').value = this.value; calculateROI()">
+                    </div>
+                    
+                    <div class="roi-input-group">
+                        <label>Solution actuelle</label>
+                        <select id="current-solution" onchange="calculateROI()">
+                            <option value="microsoft">Microsoft 365 Business</option>
+                            <option value="google">Google Workspace</option>
+                            <option value="onprem">On-premise</option>
+                            <option value="none">Pas de solution</option>
+                        </select>
+                    </div>
+                    
+                    <div class="roi-input-group">
+                        <label>Secteur d'activité</label>
+                        <select id="sector" onchange="calculateROI()">
+                            <option value="public">Secteur public</option>
+                            <option value="health">Santé</option>
+                            <option value="industry">Industrie</option>
+                            <option value="services">Services</option>
+                        </select>
+                    </div>
+                    
+                    <div class="roi-input-group">
+                        <label>Priorité</label>
+                        <select id="priority" onchange="calculateROI()">
+                            <option value="sovereignty">Souveraineté des données</option>
+                            <option value="cost">Réduction des coûts</option>
+                            <option value="hybrid">Solution hybride</option>
+                            <option value="performance">Performance</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="roi-results">
+                    <div class="roi-amount" id="savings">32 400€</div>
+                    <div class="roi-percentage">Économies annuelles estimées : -68%</div>
+                </div>
+                
+                <div class="roi-cta">
+                    <a href="#contact" class="btn-primary">Obtenir une étude personnalisée gratuite</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Section Équipe -->
+    <section class="team-section" id="team">
+        <div class="container">
+            <div class="section-header">
+                <h2>Notre Équipe d'Experts</h2>
+                <p>3 ingénieurs passionnés avec 75 ans d'expérience cumulée</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar">SQ</div>
+                    <h3 class="member-name">Sébastien QUESTIER</h3>
+                    <p class="member-role">Fondateur & Expert Infrastructure</p>
+                    <p style="font-size: 14px; color: var(--gray); margin: 15px 0;">
+                        25 ans d'expertise Microsoft. Spécialiste Active Directory, architecte solutions hybrides.
+                    </p>
+                    <div class="member-certifications">
+                        <span class="cert-chip">Microsoft Certified</span>
+                        <span class="cert-chip">AD Expert</span>
+                        <span class="cert-chip">Cloud Architect</span>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar">RB</div>
+                    <h3 class="member-name">Romain BASTIEN</h3>
+                    <p class="member-role">Expert Sécurité & Conformité</p>
+                    <p style="font-size: 14px; color: var(--gray); margin: 15px 0;">
+                        Spécialiste HardenAD et conformité ANSSI. Expert en durcissement d'infrastructures critiques.
+                    </p>
+                    <div class="member-certifications">
+                        <span class="cert-chip">Security Expert</span>
+                        <span class="cert-chip">ANSSI</span>
+                        <span class="cert-chip">ISO 27001</span>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar">HJ</div>
+                    <h3 class="member-name">Hugo JOUCLA</h3>
+                    <p class="member-role">Expert Open Source & DevOps</p>
+                    <p style="font-size: 14px; color: var(--gray); margin: 15px 0;">
+                        Architecte solutions souveraines. Spécialiste Linux, Nextcloud, automatisation.
+                    </p>
+                    <div class="member-certifications">
+                        <span class="cert-chip">Linux Expert</span>
+                        <span class="cert-chip">DevOps</span>
+                        <span class="cert-chip">Kubernetes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Timeline Projets Récents -->
+    <section class="timeline-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Projets Récents</h2>
+                <p>500+ projets réussis en 25 ans</p>
+            </div>
+            
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Novembre 2024</div>
+                        <div class="timeline-title">Migration AD Mairie - 500 postes</div>
+                        <div class="timeline-description">
+                            Migration Active Directory 2012 vers 2022 avec durcissement ANSSI complet.
+                        </div>
+                        <div class="timeline-tags">
+                            <span class="timeline-tag">Active Directory</span>
+                            <span class="timeline-tag">ANSSI</span>
+                            <span class="timeline-tag">Secteur Public</span>
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Octobre 2024</div>
+                        <div class="timeline-title">Nextcloud Hôpital - 1000 utilisateurs</div>
+                        <div class="timeline-description">
+                            Déploiement solution souveraine Nextcloud en remplacement d'Office 365.
+                        </div>
+                        <div class="timeline-tags">
+                            <span class="timeline-tag">Nextcloud</span>
+                            <span class="timeline-tag">HDS</span>
+                            <span class="timeline-tag">Souverain</span>
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Septembre 2024</div>
+                        <div class="timeline-title">Infrastructure Hybride ETI</div>
+                        <div class="timeline-description">
+                            Architecture hybride Microsoft 365 + solutions open source pour 300 utilisateurs.
+                        </div>
+                        <div class="timeline-tags">
+                            <span class="timeline-tag">M365</span>
+                            <span class="timeline-tag">Hybride</span>
+                            <span class="timeline-tag">Industrie</span>
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Double Compétence Section -->
+    <section class="competence-section" id="competences">
+        <div class="container">
+            <div class="section-header">
+                <h2>Double Compétence : Microsoft & Open Source</h2>
+                <p>Liberté de choix • Solutions sur mesure • Souveraineté numérique</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1000px; margin: 0 auto 60px;">
+                <div style="background: white; padding: 30px; border-radius: 8px; border-top: 4px solid var(--blue); box-shadow: 0 5px 20px rgba(0,0,0,0.08);">
+                    <h3 style="font-size: 24px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                        <span style="color: var(--blue);">🔷</span> Expertise Microsoft
+                    </h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Active Directory Expert</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Microsoft 365 & Azure</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Exchange & SharePoint</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Hyper-V (100%)</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>PowerShell Automation</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Ingénieur certifié depuis 25 ans</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Intune MDM</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>HardenAD ANSSI</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: white; padding: 30px; border-radius: 8px; border-top: 4px solid var(--green); box-shadow: 0 5px 20px rgba(0,0,0,0.08);">
+                    <h3 style="font-size: 24px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                        <span style="color: var(--green);">🐧</span> Solutions Souveraines
+                    </h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Linux (Debian, Ubuntu)</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Nextcloud (GAFAM-free)</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Zimbra Mail</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Proxmox VE</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Zabbix & Prometheus</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>LibreOffice Migration</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Solutions françaises</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>RGPD & Souveraineté</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services PRO -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <div class="services-header">
+                <h2>Services & Solutions</h2>
+                <p>Des solutions sur mesure pour chaque défi d'infrastructure</p>
+            </div>
+            
+            <div class="services-categories">
+                <!-- Infrastructure Microsoft -->
+                <div class="service-category">
+                    <div class="service-category-icon">🏢</div>
+                    <h3>Infrastructure Microsoft</h3>
+                    <p class="service-category-desc">
+                        25 ans d'expertise pure Microsoft. De l'Active Directory au Cloud Azure, nous maîtrisons l'écosystème complet.
+                    </p>
+                    <ul class="service-list">
+                        <li>Active Directory & Azure AD</li>
+                        <li>Microsoft 365 & Exchange</li>
+                        <li>Hyper-V & System Center</li>
+                        <li>SQL Server & Power BI</li>
+                        <li>Intune MDM & Security</li>
+                    </ul>
+                    <span class="service-badge">Certifié Microsoft • 25 ans</span>
+                </div>
+                
+                <!-- Solutions Souveraines -->
+                <div class="service-category sovereign">
+                    <div class="service-category-icon">🛡️</div>
+                    <h3>Solutions Souveraines</h3>
+                    <p class="service-category-desc">
+                        Indépendance technologique complète avec des solutions Open Source européennes et françaises.
+                    </p>
+                    <ul class="service-list">
+                        <li>Nextcloud & LibreOffice</li>
+                        <li>Zimbra & BlueMind</li>
+                        <li>Proxmox VE & KVM</li>
+                        <li>Linux Enterprise (RHEL, Debian)</li>
+                        <li>Conformité RGPD & ANSSI</li>
+                    </ul>
+                    <span class="service-badge" style="background: rgba(39,174,96,0.1); color: var(--green);">100% Souverain • HDS</span>
+                </div>
+                
+                <!-- Services Hybrides -->
+                <div class="service-category hybrid">
+                    <div class="service-category-icon">🔄</div>
+                    <h3>Services Spécialisés</h3>
+                    <p class="service-category-desc">
+                        L'impossible devient possible. Reverse engineering, migrations complexes, intégrations sur mesure.
+                    </p>
+                    <ul class="service-list">
+                        <li>Migration Office 365 → Souverain</li>
+                        <li>Durcissement AD (HardenAD)</li>
+                        <li>Reverse Engineering Legacy</li>
+                        <li>Automatisation IA (Claude, Copilot)</li>
+                        <li>Support 24/7 Critique</li>
+                    </ul>
+                    <span class="service-badge" style="background: rgba(230,126,34,0.1); color: var(--orange);">99% Remote • 24h SLA</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Témoignages avec Logos -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Témoignages Clients</h2>
+                <p>La confiance de nos clients est notre plus grande fierté</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-author">
+                            <div class="author-avatar">JD</div>
+                            <div class="author-info">
+                                <h4>Jean Dupont</h4>
+                                <p>DSI - Groupe Industrial SA</p>
+                            </div>
+                        </div>
+                        <img class="company-logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='30'%3E%3Crect width='80' height='30' fill='%23e0e0e0'/%3E%3Ctext x='40' y='20' text-anchor='middle' fill='%23999' font-size='10' font-family='Arial'%3EIndustrie%3C/text%3E%3C/svg%3E" alt="Logo">
+                    </div>
+                    <div class="testimonial-rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <div class="testimonial-content">
+                        "SYAGA a résolu en 2 semaines un problème d'Active Directory que 3 consultants n'avaient pas pu résoudre en 6 mois. Expertise exceptionnelle."
+                    </div>
+                    <div class="testimonial-date">Novembre 2024</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-author">
+                            <div class="author-avatar">ML</div>
+                            <div class="author-info">
+                                <h4>Marie Laurent</h4>
+                                <p>Directrice IT - CHU Marseille</p>
+                            </div>
+                        </div>
+                        <img class="company-logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='30'%3E%3Crect width='80' height='30' fill='%23e0e0e0'/%3E%3Ctext x='40' y='20' text-anchor='middle' fill='%23999' font-size='10' font-family='Arial'%3ESanté%3C/text%3E%3C/svg%3E" alt="Logo">
+                    </div>
+                    <div class="testimonial-rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <div class="testimonial-content">
+                        "Migration vers Nextcloud réussie pour 1000 utilisateurs. Souveraineté des données médicales garantie, économies de 70% sur les licences."
+                    </div>
+                    <div class="testimonial-date">Octobre 2024</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-author">
+                            <div class="author-avatar">PM</div>
+                            <div class="author-info">
+                                <h4>Pierre Martin</h4>
+                                <p>DSI - Mairie d'Aix</p>
+                            </div>
+                        </div>
+                        <img class="company-logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='30'%3E%3Crect width='80' height='30' fill='%23e0e0e0'/%3E%3Ctext x='40' y='20' text-anchor='middle' fill='%23999' font-size='10' font-family='Arial'%3EPublic%3C/text%3E%3C/svg%3E" alt="Logo">
+                    </div>
+                    <div class="testimonial-rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <div class="testimonial-content">
+                        "Durcissement AD conforme ANSSI réalisé en un temps record. Support 24/7 vraiment réactif. Recommandé par l'ANSSI elle-même."
+                    </div>
+                    <div class="testimonial-date">Septembre 2024</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-author">
+                            <div class="author-avatar">SB</div>
+                            <div class="author-info">
+                                <h4>Sophie Bernard</h4>
+                                <p>CTO - Tech Services</p>
+                            </div>
+                        </div>
+                        <img class="company-logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='30'%3E%3Crect width='80' height='30' fill='%23e0e0e0'/%3E%3Ctext x='40' y='20' text-anchor='middle' fill='%23999' font-size='10' font-family='Arial'%3EServices%3C/text%3E%3C/svg%3E" alt="Logo">
+                    </div>
+                    <div class="testimonial-rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <div class="testimonial-content">
+                        "Infrastructure hybride Microsoft + Linux parfaitement intégrée. La double compétence fait vraiment la différence. ROI en 8 mois."
+                    </div>
+                    <div class="testimonial-date">Août 2024</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Blog Preview -->
+    <section class="blog-section" id="blog">
+        <div class="container">
+            <div class="section-header">
+                <h2>Ressources & Expertise</h2>
+                <p>Guides pratiques, analyses techniques et retours d'expérience</p>
+            </div>
+            
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <div class="blog-image">📘</div>
+                    <div class="blog-content">
+                        <span class="blog-category">Guide</span>
+                        <h3 class="blog-title">Migration AD 2022 : Guide Complet</h3>
+                        <p class="blog-excerpt">
+                            Tout ce qu'il faut savoir pour migrer votre Active Directory vers Windows Server 2022 en toute sécurité.
+                        </p>
+                        <a href="#" class="blog-link">Télécharger le guide →</a>
+                    </div>
+                </article>
+                
+                <article class="blog-card">
+                    <div class="blog-image">🔍</div>
+                    <div class="blog-content">
+                        <span class="blog-category">Comparatif</span>
+                        <h3 class="blog-title">Nextcloud vs OneDrive : Analyse 2025</h3>
+                        <p class="blog-excerpt">
+                            Comparatif détaillé entre la solution souveraine Nextcloud et Microsoft OneDrive pour les entreprises.
+                        </p>
+                        <a href="#" class="blog-link">Lire l'analyse →</a>
+                    </div>
+                </article>
+                
+                <article class="blog-card">
+                    <div class="blog-image">🛡️</div>
+                    <div class="blog-content">
+                        <span class="blog-category">Sécurité</span>
+                        <h3 class="blog-title">HardenAD : Checklist ANSSI</h3>
+                        <p class="blog-excerpt">
+                            Checklist complète pour le durcissement de votre Active Directory selon les recommandations ANSSI.
+                        </p>
+                        <a href="#" class="blog-link">Télécharger la checklist →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact avec Formulaire Qualifié -->
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2>Un défi impossible ? Parlons-en.</h2>
+                    <p>Microsoft, Open Source ou hybride : nous avons la solution.</p>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="contact-icon">📞</div>
+                            <div class="contact-details">
+                                <h4>04 12 39 48 16</h4>
+                                <p>Ligne directe - Réponse immédiate</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="contact-icon">📧</div>
+                            <div class="contact-details">
+                                <h4>contact@syaga.fr</h4>
+                                <p>Réponse garantie sous 24h</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="contact-icon">📍</div>
+                            <div class="contact-details">
+                                <h4>Zones d'intervention</h4>
+                                <p>PACA • France • International (99% remote)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <div class="form-header">
+                        <h3>Diagnostic Gratuit</h3>
+                        <p>Obtenez une analyse personnalisée en 48h</p>
+                    </div>
+                    
+                    <form>
+                        <div class="form-group">
+                            <label>Nom complet *</label>
+                            <input type="text" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Email professionnel *</label>
+                            <input type="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Téléphone</label>
+                            <input type="tel">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Type de projet *</label>
+                            <select required>
+                                <option>Migration Active Directory</option>
+                                <option>Solution souveraine</option>
+                                <option>Infrastructure hybride</option>
+                                <option>Durcissement sécurité</option>
+                                <option>Support & maintenance</option>
+                                <option>Autre</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Niveau d'urgence *</label>
+                            <div class="urgency-selector">
+                                <div class="urgency-option" onclick="selectUrgency(this)">Normal</div>
+                                <div class="urgency-option selected" onclick="selectUrgency(this)">Urgent</div>
+                                <div class="urgency-option" onclick="selectUrgency(this)">Critique</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea placeholder="Décrivez votre projet ou problématique..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="form-submit">
+                            Obtenir mon diagnostic gratuit →
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer Enrichi -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Active Directory</a></li>
+                        <li><a href="#">Microsoft 365</a></li>
+                        <li><a href="#">Solutions Souveraines</a></li>
+                        <li><a href="#">Infrastructure Hybride</a></li>
+                        <li><a href="#">Support 24/7</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Ressources</h4>
+                    <ul>
+                        <li>
+                            <a href="#" class="download-item">
+                                📄 Guide Migration AD 2022
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="download-item">
+                                📊 Calculateur ROI
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="download-item">
+                                ✅ Checklist ANSSI
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Zones d'intervention</h4>
+                    <ul>
+                        <li><a href="#">Port-de-Bouc (Siège)</a></li>
+                        <li><a href="#">Nîmes</a></li>
+                        <li><a href="#">Saint-Andiol</a></li>
+                        <li><a href="#">Marseille</a></li>
+                        <li><a href="#">France entière (Remote)</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="tel:0412394816">📞 04 12 39 48 16</a></li>
+                        <li><a href="mailto:contact@syaga.fr">📧 contact@syaga.fr</a></li>
+                        <li><a href="#">📍 13110 Port-de-Bouc</a></li>
+                        <li><a href="#">🔗 LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 SYAGA - Expert Infrastructure Microsoft & Solutions Souveraines depuis 25 ans</p>
+                <p>SIRET: XXX XXX XXX | Ingénieur Microsoft Certifié | Partenaire IT France</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+        <button class="chat-button" onclick="alert('Chat en ligne disponible prochainement.\nAppelez-nous au 04 12 39 48 16 pour une assistance immédiate.')">
+            💬
+            <span class="chat-pulse"></span>
+        </button>
+    </div>
+    
+    <script>
+        // Calculateur ROI
+        function calculateROI() {
+            const users = parseInt(document.getElementById('users').value);
+            const solution = document.getElementById('current-solution').value;
+            const sector = document.getElementById('sector').value;
+            const priority = document.getElementById('priority').value;
+            
+            let baseCost = users * 25 * 12; // Coût annuel Microsoft de base
+            let savings = 0;
+            
+            if (priority === 'sovereignty' || sector === 'public') {
+                savings = baseCost * 0.7; // 70% d'économies en souverain
+            } else if (priority === 'cost') {
+                savings = baseCost * 0.65;
+            } else if (priority === 'hybrid') {
+                savings = baseCost * 0.45;
+            } else {
+                savings = baseCost * 0.35;
+            }
+            
+            document.getElementById('savings').textContent = Math.round(savings).toLocaleString('fr-FR') + '€';
+        }
+        
+        // Urgency Selector
+        function selectUrgency(element) {
+            document.querySelectorAll('.urgency-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+        
+        // Video placeholder
+        document.querySelector('.play-button').addEventListener('click', function() {
+            alert('Vidéo de présentation SYAGA disponible prochainement.\nContactez-nous au 04 12 39 48 16 pour une démonstration personnalisée.');
+        });
+        
+        // Form submit
+        document.querySelector('.contact-form form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Merci ! Nous vous contacterons dans les 24h.\nPour une réponse immédiate, appelez le 04 12 39 48 16.');
+        });
+        
+        // Initialize ROI
+        calculateROI();
+    </script>
+</body>
+</html>
