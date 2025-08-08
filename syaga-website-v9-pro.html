@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYAGA - Expert Infrastructure Microsoft & Solutions Souveraines</title>
+    <meta name="description" content="Expert Microsoft + Open Source. Active Directory, solutions souveraines, secteur public. Là où les autres abandonnent, SYAGA trouve la solution.">
+    <meta name="keywords" content="Active Directory, Microsoft 365, HardenAD, ANSSI, solutions souveraines, Linux, Nextcloud, Zimbra, infrastructure IT, secteur public, reverse engineering">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --navy: #1e3a5f;
+            --blue: #4a90e2;
+            --green: #27ae60;
+            --orange: #e67e22;
+            --gray: #7f8c8d;
+            --light: #ecf0f1;
+            --white: #ffffff;
+            --dark: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--dark);
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Top Bar avec Portails */
+        .top-bar {
+            background: var(--navy);
+            color: white;
+            padding: 8px 0;
+            font-size: 13px;
+        }
+        
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .top-info {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .portal-access {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .portal-btn {
+            padding: 5px 15px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s;
+            font-size: 12px;
+        }
+        
+        .portal-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .portal-btn.prism {
+            background: var(--blue);
+            border-color: var(--blue);
+        }
+        
+        /* Header Principal */
+        header {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: baseline;
+            gap: 15px;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--navy);
+            letter-spacing: -1px;
+        }
+        
+        .tagline {
+            font-size: 13px;
+            color: var(--gray);
+            font-style: italic;
+        }
+        
+        .main-nav {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .main-nav a {
+            color: var(--navy);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .main-nav a:hover {
+            color: var(--blue);
+            border-bottom-color: var(--blue);
+        }
+        
+        .cta-phone {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: var(--green);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        
+        .cta-phone:hover {
+            background: #229954;
+        }
+        
+        /* Hero Section V4 Style */
+        .hero {
+            background: var(--navy);
+            color: white;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(74,144,226,0.3) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-text h1 {
+            font-size: 38px;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .hero-text h1 strong {
+            font-weight: 700;
+            color: var(--blue);
+        }
+        
+        .hero-text p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .hero-bullets {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .hero-bullets li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .hero-bullets li:before {
+            content: "✓";
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: var(--green);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            flex-shrink: 0;
+        }
+        
+        .hero-visual {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--blue);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+        
+        /* Double Competence Section */
+        .competence-section {
+            padding: 60px 20px;
+            background: #f8f9fa;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-header h2 {
+            font-size: 32px;
+            font-weight: 300;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            font-size: 16px;
+        }
+        
+        .competence-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .competence-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            border-top: 4px solid var(--blue);
+        }
+        
+        .competence-card.sovereign {
+            border-top-color: var(--green);
+        }
+        
+        .competence-card h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .competence-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .competence-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        
+        .competence-item:before {
+            content: "✓";
+            color: var(--green);
+            font-weight: bold;
+            margin-top: 2px;
+        }
+        
+        /* Services Grid - VERSION PRO */
+        .services-section {
+            padding: 80px 20px;
+            background: #f8f9fa;
+        }
+        
+        .services-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .services-header h2 {
+            font-size: 36px;
+            font-weight: 300;
+            color: var(--navy);
+            margin-bottom: 15px;
+        }
+        
+        .services-header p {
+            color: var(--gray);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .services-categories {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .service-category {
+            background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--blue) 0%, var(--navy) 100%);
+        }
+        
+        .service-category.sovereign::before {
+            background: linear-gradient(90deg, var(--green) 0%, #1e7e34 100%);
+        }
+        
+        .service-category.hybrid::before {
+            background: linear-gradient(90deg, var(--orange) 0%, #d35400 100%);
+        }
+        
+        .service-category:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        }
+        
+        .service-category-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--blue) 0%, var(--navy) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .service-category.sovereign .service-category-icon {
+            background: linear-gradient(135deg, var(--green) 0%, #1e7e34 100%);
+        }
+        
+        .service-category.hybrid .service-category-icon {
+            background: linear-gradient(135deg, var(--orange) 0%, #d35400 100%);
+        }
+        
+        .service-category h3 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 15px;
+        }
+        
+        .service-category-desc {
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        
+        .service-list {
+            list-style: none;
+        }
+        
+        .service-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            font-size: 14px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        
+        .service-list li:hover {
+            color: var(--blue);
+            padding-left: 8px;
+        }
+        
+        .service-list li:before {
+            content: "▸";
+            color: var(--blue);
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .service-category.sovereign .service-list li:before {
+            color: var(--green);
+        }
+        
+        .service-category.hybrid .service-list li:before {
+            color: var(--orange);
+        }
+        
+        .service-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(74,144,226,0.1);
+            color: var(--blue);
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+        
+        .service-category.sovereign .service-badge {
+            background: rgba(39,174,96,0.1);
+            color: var(--green);
+        }
+        
+        .service-category.hybrid .service-badge {
+            background: rgba(230,126,34,0.1);
+            color: var(--orange);
+        }
+        
+        /* Use Cases */
+        .cases-section {
+            padding: 60px 20px;
+            background: #f8f9fa;
+        }
+        
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .case-card {
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 25px;
+            transition: all 0.3s;
+        }
+        
+        .case-card:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .case-card h3 {
+            font-size: 18px;
+            color: var(--navy);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .case-card p {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+        
+        .case-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            background: var(--light);
+            border-radius: 3px;
+            font-size: 11px;
+            color: var(--gray);
+        }
+        
+        /* Contact Bar */
+        .contact-bar {
+            background: var(--navy);
+            color: white;
+            padding: 50px 20px;
+        }
+        
+        .contact-content {
+            text-align: center;
+        }
+        
+        .contact-content h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .contact-content p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 30px;
+        }
+        
+        .contact-method {
+            text-align: center;
+        }
+        
+        .contact-method strong {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .contact-method span {
+            font-size: 13px;
+            opacity: 0.8;
+        }
+        
+        /* Footer */
+        footer {
+            background: #1a2b3d;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 13px;
+        }
+        
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            opacity: 0.8;
+        }
+        
+        footer a:hover {
+            opacity: 1;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .competence-grid { grid-template-columns: 1fr; }
+            .services-categories { grid-template-columns: 1fr; }
+            .cases-grid { grid-template-columns: 1fr; }
+            .contact-methods { flex-direction: column; gap: 20px; }
+            .main-nav { display: none; }
+            .hero h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar avec Portails -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-info">
+                    <span>📍 France • Monaco • Maroc • International</span>
+                    <span>📧 contact@syaga.fr</span>
+                </div>
+                <div class="portal-access">
+                    <a href="#" class="portal-btn">🔒 Espace Client</a>
+                    <a href="#" class="portal-btn">🤝 Portail Partenaire</a>
+                    <a href="#" class="portal-btn prism">📊 Dashboard PRISM</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Header Principal -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <span class="logo">SYAGA</span>
+                    <span class="tagline">L'expert que les experts appellent</span>
+                </div>
+                <nav class="main-nav">
+                    <a href="#competences">Compétences</a>
+                    <a href="#services">Services</a>
+                    <a href="#cases">Cas d'usage</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+                <a href="tel:0412394816" class="cta-phone">
+                    📞 04 12 39 48 16
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section V4 Style -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Là où les autres <strong>abandonnent</strong>,<br>nous trouvons la solution</h1>
+                <p>En combinant notre expertise de 25 ans et l'IA générative d'aujourd'hui,<br>
+                plus aucun défi n'est impossible.</p>
+                
+                <ul class="hero-bullets">
+                    <li>Microsoft expert + Solutions souveraines Linux</li>
+                    <li>Durcissement AD conforme ANSSI</li>
+                    <li>IA générative : Claude, Copilot, automatisation intelligente</li>
+                    <li>25 ans d'expertise amplifiée par l'IA = Zéro limite</li>
+                </ul>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">25</div>
+                        <div class="stat-label">Ans d'expertise</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Taux résolution</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">24h</div>
+                        <div class="stat-label">Délai réponse</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">99%</div>
+                        <div class="stat-label">Remote</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Double Compétence Section V4 Style -->
+    <section class="competence-section" id="competences">
+        <div class="container">
+            <div class="section-header">
+                <h2>Double Compétence : Microsoft & Open Source</h2>
+                <p>Là où vous voyez un problème, nous voyons une solution</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1000px; margin: 0 auto 60px;">
+                <div style="background: #f8f9fa; padding: 30px; border-radius: 8px; border-top: 4px solid var(--blue);">
+                    <h3 style="font-size: 24px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                        <span style="color: var(--blue);">🔷</span> Expertise Microsoft
+                    </h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Active Directory Expert</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Microsoft 365 & Azure</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Exchange & SharePoint</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Hyper-V (100%)</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>PowerShell Automation</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>MCSE depuis 2000</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Intune MDM</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>HardenAD ANSSI</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 30px; border-radius: 8px; border-top: 4px solid var(--green);">
+                    <h3 style="font-size: 24px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                        <span style="color: var(--green);">🐧</span> Solutions Souveraines
+                    </h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Linux (Debian, Ubuntu)</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Nextcloud (GAFAM-free)</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Zimbra Mail</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Proxmox VE</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Zabbix & Prometheus</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>LibreOffice Migration</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>Solutions françaises</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="color: var(--green); font-weight: bold;">✓</span>
+                            <span>RGPD & Souveraineté</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services PRO Version -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <div class="services-header">
+                <h2>Services & Solutions</h2>
+                <p>Des solutions sur mesure pour chaque défi d'infrastructure</p>
+            </div>
+            
+            <div class="services-categories">
+                <!-- Infrastructure Microsoft -->
+                <div class="service-category">
+                    <div class="service-category-icon">🏢</div>
+                    <h3>Infrastructure Microsoft</h3>
+                    <p class="service-category-desc">
+                        25 ans d'expertise pure Microsoft. De l'Active Directory au Cloud Azure, nous maîtrisons l'écosystème complet.
+                    </p>
+                    <ul class="service-list">
+                        <li>Active Directory & Azure AD</li>
+                        <li>Microsoft 365 & Exchange</li>
+                        <li>Hyper-V & System Center</li>
+                        <li>SQL Server & Power BI</li>
+                        <li>Intune MDM & Security</li>
+                    </ul>
+                    <span class="service-badge">MCSE • Gold Partner</span>
+                </div>
+                
+                <!-- Solutions Souveraines -->
+                <div class="service-category sovereign">
+                    <div class="service-category-icon">🛡️</div>
+                    <h3>Solutions Souveraines</h3>
+                    <p class="service-category-desc">
+                        Indépendance technologique complète avec des solutions Open Source européennes et françaises.
+                    </p>
+                    <ul class="service-list">
+                        <li>Nextcloud & LibreOffice</li>
+                        <li>Zimbra & BlueMind</li>
+                        <li>Proxmox VE & KVM</li>
+                        <li>Linux Enterprise (RHEL, Debian)</li>
+                        <li>Conformité RGPD & ANSSI</li>
+                    </ul>
+                    <span class="service-badge">100% Souverain • HDS</span>
+                </div>
+                
+                <!-- Services Hybrides -->
+                <div class="service-category hybrid">
+                    <div class="service-category-icon">🔄</div>
+                    <h3>Services Spécialisés</h3>
+                    <p class="service-category-desc">
+                        L'impossible devient possible. Reverse engineering, migrations complexes, intégrations sur mesure.
+                    </p>
+                    <ul class="service-list">
+                        <li>Migration Office 365 → Souverain</li>
+                        <li>Durcissement AD (HardenAD)</li>
+                        <li>Reverse Engineering Legacy</li>
+                        <li>Automatisation IA (Claude, Copilot)</li>
+                        <li>Support 24/7 Critique</li>
+                    </ul>
+                    <span class="service-badge">99% Remote • 24h SLA</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Cas d'usage -->
+    <section class="cases-section" id="cases">
+        <div class="container">
+            <div class="section-header">
+                <h2>Cas Concrets de Réussite</h2>
+                <p>Des défis impossibles transformés en succès</p>
+            </div>
+            
+            <div class="cases-grid">
+                <div class="case-card">
+                    <h3>🏛️ Mairie - Migration Souveraine</h3>
+                    <p>Migration Office 365 vers Nextcloud + Zimbra. Souveraineté totale des données, conformité RGPD, économies 70%.</p>
+                    <div class="case-tags">
+                        <span class="tag">Nextcloud</span>
+                        <span class="tag">Zimbra</span>
+                        <span class="tag">Linux</span>
+                        <span class="tag">ANSSI</span>
+                    </div>
+                </div>
+                
+                <div class="case-card">
+                    <h3>🏥 Hôpital - Infrastructure Hybride</h3>
+                    <p>Active Directory durci + solutions open source. Conformité HDS, monitoring Zabbix, backup Veeam.</p>
+                    <div class="case-tags">
+                        <span class="tag">AD Hardening</span>
+                        <span class="tag">Zabbix</span>
+                        <span class="tag">HDS</span>
+                        <span class="tag">Hybride</span>
+                    </div>
+                </div>
+                
+                <div class="case-card">
+                    <h3>🏭 Industrie - Rescue Legacy</h3>
+                    <p>Reverse engineering SalesLogix 2000 après 3 échecs. Migration progressive, zéro interruption.</p>
+                    <div class="case-tags">
+                        <span class="tag">Reverse Eng.</span>
+                        <span class="tag">Legacy</span>
+                        <span class="tag">Migration</span>
+                    </div>
+                </div>
+                
+                <div class="case-card">
+                    <h3>🏢 ETI - Full Microsoft</h3>
+                    <p>Migration AD 2012→2022, M365 complet, Intune MDM. 500 postes, 99% remote.</p>
+                    <div class="case-tags">
+                        <span class="tag">Active Directory</span>
+                        <span class="tag">M365</span>
+                        <span class="tag">Intune</span>
+                    </div>
+                </div>
+                
+                <div class="case-card">
+                    <h3>🎓 École - Budget Serré</h3>
+                    <p>Infrastructure 100% open source. Proxmox, Nextcloud, LibreOffice. Économies 85%.</p>
+                    <div class="case-tags">
+                        <span class="tag">Proxmox</span>
+                        <span class="tag">LibreOffice</span>
+                        <span class="tag">OSS</span>
+                    </div>
+                </div>
+                
+                <div class="case-card">
+                    <h3>🏛️ Ministère - Souveraineté</h3>
+                    <p>Solutions 100% françaises et européennes. Conformité maximale, indépendance technologique.</p>
+                    <div class="case-tags">
+                        <span class="tag">Souverain</span>
+                        <span class="tag">France</span>
+                        <span class="tag">RGPD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Bar -->
+    <section class="contact-bar" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2>Un défi impossible ? Parlons-en.</h2>
+                <p>Microsoft, Open Source ou hybride : nous avons la solution.</p>
+                
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <strong>04 12 39 48 16</strong>
+                        <span>Ligne directe</span>
+                    </div>
+                    <div class="contact-method">
+                        <strong>contact@syaga.fr</strong>
+                        <span>Réponse 24h</span>
+                    </div>
+                    <div class="contact-method">
+                        <strong>99% Remote</strong>
+                        <span>Intervention mondiale</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            © 2025 SYAGA - Expert Infrastructure Microsoft & Solutions Souveraines depuis 25 ans | 
+            <a href="#">Mentions légales</a> | 
+            <a href="#">RGPD</a> | 
+            <a href="#">CGV</a> | 
+            France • Monaco • Maroc • International
+        </div>
+    </footer>
+    
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // Portal simulation
+        document.querySelectorAll('.portal-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('Connexion Microsoft 365\n\nCette fonctionnalité nécessite :\n- Azure AD App Registration\n- Client ID configuré\n- Redirect URI autorisé\n\nContactez SYAGA pour obtenir vos accès.');
+            });
+        });
+    </script>
+</body>
+</html>
